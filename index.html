@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Cesena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #111110;
+            --white: #F9F8F6;
+            --gray: #787672;
+            --rule: #252422;
+            --accent: #C8B89A;
+            --bg: #111110;
+            --text: #F9F8F6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        /* ─── NAV ─── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2.5rem;
+        }
+
+        .nav-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s, color 0.3s ease;
+        }
+
+        @media (hover: hover) { .nav-links a:hover { opacity: 1; } }
+
+        /* Nav turns light when scrolled past hero */
+        .nav.scrolled .nav-name { color: var(--white); }
+        .nav.scrolled .nav-links a { color: var(--white); }
+
+
+        /* ─── HERO LETTER ANIMATION ─── */
+        .hero-letter {
+            display: inline-block;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        .hero-letter.landed {
+            opacity: 1;
+            transform: translate(0, 0) !important;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: sticky;
+            top: 0;
+            height: 85vh;
+            overflow: hidden;
+            background: var(--white);
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5.5rem 2.5rem 2.5rem;
+        }
+
+        .hero-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(17,17,16,0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-giant-name {
+            position: relative;
+            z-index: 2;
+            line-height: 0.88;
+        }
+
+        .hero-giant-name .name-line {
+            display: block;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3.5rem, 11.5vw, 11rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            color: var(--black);
+            white-space: nowrap;
+        }
+
+        /* Dividing line between ANGEL and CESENA */
+        .hero-name-rule {
+            width: 100%;
+            height: 2px;
+            background: rgba(17,17,16,0.15);
+            margin: 0.15em 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            font-size: 0.82rem;
+            line-height: 1.7;
+            color: rgba(17,17,16,0.45);
+            font-style: italic;
+            max-width: 320px;
+        }
+
+        .hero-count {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(17,17,16,0.35);
+            text-align: right;
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* ─── HERO CARDS ─── */
+        .hero-cards {
+            position: absolute;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-52%);
+            width: clamp(260px, 34vw, 420px);
+            height: 420px;
+            z-index: 3;
+        }
+
+        .hero-card {
+            position: absolute;
+            width: 62%;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* card 1: Globología — top left, tilted left */
+        .hero-card:nth-child(1) {
+            height: 190px;
+            aspect-ratio: 3/4;
+            width: auto;
+            top: 0;
+            left: 0;
+            transform: rotate(-6deg);
+            z-index: 1;
+        }
+
+        /* card 2: Casa Archivo — center, straight */
+        .hero-card:nth-child(2) {
+            height: 220px;
+            aspect-ratio: 9/16;
+            width: auto;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            z-index: 3;
+        }
+
+        /* card 3: BDN — bottom right, tilted right */
+        .hero-card:nth-child(3) {
+            height: 185px;
+            aspect-ratio: 4/3;
+            width: auto;
+            bottom: 0;
+            right: 0;
+            transform: rotate(7deg);
+            z-index: 2;
+        }
+
+        @media (hover: hover) {
+            .hero-cards:hover .hero-card:nth-child(1) { transform: rotate(-9deg) translate(-6px, -8px); }
+            .hero-cards:hover .hero-card:nth-child(2) { transform: translateX(-50%) rotate(2deg) translateY(-10px); }
+            .hero-cards:hover .hero-card:nth-child(3) { transform: rotate(10deg) translate(4px, 6px); }
+        }
+
+        /* ─── WORK ─── */
+        .work {
+            padding: 3.5rem 2.5rem 4rem;
+            background: #1a1916;
+            position: relative;
+            z-index: 10;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -32px 80px rgba(0,0,0,0.7);
+            margin-top: -2px;
+        }
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #252422;
+            padding-bottom: 1rem;
+            margin-bottom: 5rem;
+        }
+
+        .work-label {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .work-count {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+        }
+
+        /* ─── PROJECT BASE ─── */
+        .project {
+            margin-bottom: 6rem;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .project.animate-hidden {
+            opacity: 0;
+            transform: translateY(28px);
+        }
+
+        .project.visible { opacity: 1; transform: translateY(0); }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid rgba(249,248,246,0.12);
+            gap: 2rem;
+        }
+
+        .project-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            color: rgba(249,248,246,0.35);
+            flex-shrink: 0;
+        }
+
+        .project-cat {
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(249,248,246,0.35);
+            text-align: right;
+            flex: 1;
+        }
+
+        .project-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2.6rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            max-width: 680px;
+        }
+
+        .project-details {
+            display: flex;
+            gap: 3rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid #252422;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--bronze, #8B6F47);
+            text-decoration: none;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+
+        @media (hover: hover) { .project-link:hover { opacity: 0.6; } }
+
+        .detail-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 0.78rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* ─── FULL-BLEED PROJECT ─── */
+        .project-full .project-image {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-full .project-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        @media (hover: hover) {
+            .project-full:hover .project-image img { transform: scale(1.02); }
+        }
+
+        .project-full .project-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* ─── TWO-COL PROJECT ─── */
+        .project-two .project-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .project-two .project-image { overflow: hidden; }
+
+        .project-two .project-image img {
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        @media (hover: hover) {
+            .project-two:hover .project-image img { transform: scale(1.02); }
+        }
+
+        /* ─── BOOK MOCKUP ─── */
+        .book-mockup {
+            position: relative;
+            background: #1a1a18;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-cover {
+            height: 85%;
+            width: auto;
+            max-width: 38%;
+            object-fit: cover;
+            border-radius: 3px;
+            box-shadow: -12px 8px 40px rgba(0,0,0,0.7), 4px 0 12px rgba(0,0,0,0.3);
+            transform: perspective(800px) rotateY(8deg);
+            flex-shrink: 0;
+        }
+
+        .book-spreads {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex: 1;
+            height: 85%;
+        }
+
+        .book-spreads img {
+            width: 100%;
+            flex: 1;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        /* ─── IMAGE GRIDS ─── */
+        .img-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .img-grid-2 img {
+            width: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
+            transition: transform 0.5s ease;
+        }
+
+        @media (hover: hover) { .img-grid-2 img:hover { transform: scale(1.02); } }
+
+        .img-grid-3 {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .img-grid-3 img {
+            width: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
+            transition: transform 0.5s ease;
+        }
+
+        @media (hover: hover) { .img-grid-3 img:hover { transform: scale(1.02); } }
+
+        .img-grid-3 .span-col {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            height: 100%;
+        }
+
+        /* BDN site screenshots stacked scroll */
+        .bdn-screens {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            max-height: 540px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .bdn-screens::-webkit-scrollbar { display: none; }
+
+        .bdn-screens img {
+            width: 100%;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        /* ─── VIDEO ─── */
+        .video-wrap {
+            overflow: hidden;
+            border-radius: 2px;
+            background: var(--black);
+        }
+
+        .video-wrap.portrait {
+            aspect-ratio: 9/16;
+            max-height: 540px;
+        }
+
+        .video-wrap.landscape {
+            aspect-ratio: 16/9;
+        }
+
+        .video-wrap video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        /* ─── MOXY BLOCK ─── */
+        .moxy-block {
+            background: var(--black);
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .moxy-line {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            font-weight: 900;
+            color: rgba(249,248,246,0.07);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        /* ─── DIVIDER ─── */
+        .section-break {
+            border: none;
+            border-top: 1px solid #252422;
+            margin: 0 0 5rem;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-hero-img {
+            width: 100%;
+            margin-bottom: 4rem;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .about-hero-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+
+        .about { background: #1a1916; padding: 5rem 2.5rem; position: relative; z-index: 10; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-left-label {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.5rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .about-headline {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .about-headline .dim { color: rgba(249,248,246,0.22); }
+
+        .about-right p {
+            font-size: 0.88rem;
+            line-height: 1.9;
+            color: #c8c5bf;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-cap {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .about-cap-label {
+            color: rgba(249,248,246,0.4);
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .about-cap p {
+            font-size: 0.82rem;
+            color: #8a8780;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        /* ─── CONTACT — THE VOID STARES BACK ─── */
+        .contact {
+            background: var(--white);
+            padding: 0;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-inner {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 6rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-eyebrow {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.48rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(17,17,16,0.3);
+            margin-bottom: 3rem;
+            display: block;
+        }
+
+        /* The CTA — fills the room */
+        .contact-big {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3rem, 14vw, 16rem);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px #111110;
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            transition: color 0.4s ease, -webkit-text-stroke 0.4s ease;
+            cursor: default;
+            user-select: none;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        @media (hover: hover) {
+            .contact-big:hover {
+                color: #111110;
+                -webkit-text-stroke: 2px transparent;
+            }
+            .contact-card:hover { background: #111110; color: var(--white); }
+            .contact-card:hover .contact-card-label { color: rgba(249,248,246,0.4); }
+        }
+
+        /* On touch devices, contact-big shows filled by default since hover isn't available */
+        @media (hover: none) {
+            .contact-big {
+                color: #111110;
+                -webkit-text-stroke: 2px transparent;
+            }
+        }
+
+        .contact-big .pop { display: block; }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            border: 1px solid rgba(17,17,16,0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.75rem 2.5rem;
+            border-right: 1px solid rgba(17,17,16,0.15);
+            text-decoration: none;
+            color: #111110;
+            transition: background 0.2s ease, color 0.2s ease;
+            gap: 0.4rem;
+        }
+
+        .contact-card:last-child { border-right: none; }
+
+        .contact-card-label {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.42rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(17,17,16,0.35);
+            transition: color 0.2s;
+        }
+
+        .contact-card-value {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(0.6rem, 1.2vw, 0.85rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-card-arrow { display: none; }
+
+        /* ─── FOOTER ─── */
+        .footer-owlita-wrap { display: none; }
+
+        .footer-owlita {
+            position: absolute;
+            bottom: 2rem;
+            left: 3rem;
+            height: 200px;
+            width: auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        footer {
+            position: relative;
+            padding: 1.5rem 2.5rem;
+            border-top: 1px solid rgba(17,17,16,0.12);
+            background: #ede8de;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        footer p {
+            color: rgba(17,17,16,0.4);
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .footer-sig { width: 60px; opacity: 0.18; }
+
+        @media (max-width: 860px) {
+            .footer-owlita { left: 50%; transform: translateX(-50%); bottom: 1.5rem; }
+            footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.5rem 1.25rem; }
+        }
+
+        /* ─── LIGHTBOX ─── */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(17,17,16,0.97);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        /* ─── HERO FILMSTRIP (desktop) ───  */
+        .hero-filmstrip {
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 65%;
+            overflow: hidden;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+
+        .hero-filmstrip-track {
+            display: flex;
+            gap: 8px;
+            width: max-content;
+            height: 100%;
+            animation: filmscroll 28s linear infinite;
+        }
+
+        .hero-filmstrip-track img {
+            width: 260px;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 6px;
+            opacity: 0.4;
+            flex-shrink: 0;
+        }
+
+        /* Hide the old cards on desktop */
+        .hero-cards { display: none; }
+
+        @keyframes filmscroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ─── MOBILE FIRST ─── */
+        @media (hover: none) {
+            .contact-big {
+                color: #111110;
+                -webkit-text-stroke: 2px transparent;
+            }
+            .contact-cards {
+                flex-direction: column;
+                width: 100%;
+                max-width: 420px;
+            }
+            .contact-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(17,17,16,0.15);
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1.25rem 1.5rem;
+            }
+            .contact-card:last-child { border-bottom: none; }
+        }
+
+        @media (max-width: 860px) {
+
+            /* Nav */
+            .nav { padding: 1rem 1.25rem; }
+            .nav-name { font-size: 0.55rem; }
+            .nav-links { gap: 1.25rem; }
+            .nav-links a { font-size: 0.6rem; }
+
+            /* Hero — mobile */
+            .hero { padding: 4.5rem 1.25rem 1.5rem; }
+            .hero-top-bar { font-size: 0.44rem; gap: 0.5rem; flex-wrap: wrap; }
+            .hero-top-bar span:last-child { display: none; }
+            .hero-giant-name .name-line { font-size: clamp(2.8rem, 14.5vw, 7rem); white-space: nowrap; }
+            .hero-tagline { font-size: 0.75rem; max-width: 100%; }
+
+            /* Work section */
+            .work { padding: 3rem 1.25rem 2rem; }
+            .work-header { margin-bottom: 3rem; }
+
+            /* Projects */
+            .project { margin-bottom: 4rem; }
+            .project-header { flex-direction: column; gap: 0.4rem; align-items: flex-start; margin-bottom: 1rem; }
+            .project-cat { font-size: 0.58rem; }
+
+            /* All two-col project bodies → single col */
+            .project-full .project-body,
+            .project-two .project-body {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                padding: 0;
+            }
+
+            /* Full-bleed images stay full width, tighter ratio on mobile */
+            .project-full .project-image {
+                aspect-ratio: 16/9;
+            }
+
+            /* Details wrap tighter */
+            .project-details { gap: 1.25rem 2rem; }
+            .detail-value { font-size: 0.75rem; }
+
+            /* Image grids → single col stacked */
+            .img-grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .img-grid-3 {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .img-grid-3 .span-col {
+                grid-row: auto;
+            }
+            .img-grid-3 img,
+            .img-grid-2 img {
+                aspect-ratio: 4/3;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            /* Baker Bear inline grid */
+            [style*="grid-template-columns:1fr 1fr"] {
+                grid-template-columns: 1fr 1fr !important;
+            }
+
+            /* Moxy stats block */
+            [style*="font-size:3.5rem"] { font-size: 2.5rem !important; }
+            [style*="font-size:2.5rem"] { font-size: 1.8rem !important; }
+            [style*="padding:3rem"] { padding: 1.75rem !important; }
+            [style*="gap:3rem"] { gap: 1.5rem !important; }
+
+            /* BDN screenshot grid → 2 col stays ok on mobile, just smaller */
+            .img-grid-2[style*="gap:0.4rem"] {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Section breaks */
+            .section-break { display: none; }
+
+            /* About */
+            .about { padding: 1rem 0.5rem; }
+            .about-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+            .about-headline { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+
+            /* Contact */
+            .contact { padding: 3rem 1.25rem 3rem; }
+
+            /* Book mockup */
+            .book-mockup { flex-direction: column; aspect-ratio: auto; padding: 1.5rem 1.25rem; gap: 1rem; }
+            .book-cover { height: auto; max-width: 55%; }
+            .book-spreads { flex-direction: row; height: auto; }
+
+            .hero-tagline { font-size: 0.72rem; }
+
+            /* Casa Archivo dark section */
+            .project[style*="background:var(--black)"] {
+                margin: 0 -1.25rem !important;
+                padding: 3.5rem 1.25rem !important;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 400px) {
+            .hero-giant-name .name-line { font-size: clamp(2.2rem, 15vw, 4rem); white-space: nowrap; }
+            .project-title { font-size: clamp(1.1rem, 7vw, 1.6rem); }
+            [style*="grid-template-columns:1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+            .nav-links { gap: 0.75rem; }
+            .nav-links a { font-size: 0.52rem; }
+            .contact-big { font-size: clamp(2.5rem, 13vw, 5rem); }
+            .contact-inner { padding: 3rem 1rem; }
+            .contact-cards { width: 100%; }
+        }
+
+        /* Make sure nothing ever overflows the viewport */
+        @media (max-width: 860px) {
+            * { max-width: 100%; }
+            img, video { max-width: 100%; height: auto; }
+            .hero-giant-name { overflow: hidden; }
+            .project-details { flex-wrap: wrap; gap: 1rem; }
+            .project-title { word-break: break-word; }
+            [style*="aspect-ratio:16/7"] { aspect-ratio: 16/9 !important; }
+            .contact-cards { flex-direction: column; width: 100%; max-width: 100%; }
+            .contact-card { border-right: none; border-bottom: 1px solid rgba(17,17,16,0.15); flex-direction: row; justify-content: space-between; padding: 1.25rem 1.5rem; }
+            .contact-card:last-child { border-bottom: none; }
+            .about { padding: 3rem 1.25rem; }
+            /* Inline style grids that might overflow */
+            [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
+            [style*="display:grid"] { max-width: 100%; overflow: hidden; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="#" class="nav-name">Angel Cesena</a>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+
+
+        <div class="hero-top-bar">
+            <span>Cesenative</span>
+            <span>Los Angeles · 2026</span>
+        </div>
+
+        <div class="hero-giant-name">
+            <span class="name-line"><span class="hero-letter">A</span><span class="hero-letter">N</span><span class="hero-letter">G</span><span class="hero-letter">E</span><span class="hero-letter">L</span></span>
+            <div class="hero-name-rule"></div>
+            <span class="name-line"><span class="hero-letter">C</span><span class="hero-letter">E</span><span class="hero-letter">S</span><span class="hero-letter">E</span><span class="hero-letter">N</span><span class="hero-letter">A</span></span>
+        </div>
+
+        <div class="hero-bottom-bar">
+            <div></div>
+            <div class="hero-count">07<br>Projects</div>
+        </div>
+
+    </section>
+
+    <section id="work" class="work">
+        <div class="work-header">
+            <span class="work-label">Selected Work</span>
+            <span class="work-count">07 Projects</span>
+        </div>
+
+        <article class="project project-full" data-proj-num="01" data-proj-img="CAF_project_card.png" data-proj-title="Casa Archivo Familiar" data-proj-cat="Digital Archive · Design & Development" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">01</span>
+                <span class="project-cat">Digital Archive · Design & Development · 2024—Present</span>
+            </div>
+            <div class="project-image" style="border-radius:6px; overflow:hidden;">
+                <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+                    <source src="casaarchivofamiliar_screen_recording22222.mov" type="video/mp4">
+                </video>
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">Casa Archivo<br>Familiar</h2>
+                    <p class="project-desc">
+                        A digital archive documenting 100 years of family history, spanning 1926 to 2026. The site organizes photos, letters, documents, and personal stories into a browsable collection. Family members can view and contribute content. Designed and developed independently.
+                    </p>
+                    <p style="font-size:0.85rem; font-style:italic; color:var(--gray); margin-bottom:1.5rem; line-height:1.7;">"Las fotos estaban guardadas en cajas y albumes, esperando ser vistas. Ahora son de todos." &mdash; Angel Julian Cesena Barragan</p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Creator, Designer, Developer</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Concept, Design, Development, Curation</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Span</div>
+                            <div class="detail-value">1926 · 2026</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value">Live & Growing</div>
+                        </div>
+                    </div>
+                    <a href="https://casaarchivofamiliar.com" target="_blank" rel="noopener" class="project-link">Visit casaarchivofamiliar.com ↗</a>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                    <div style="aspect-ratio:4/3; border-radius:4px; overflow:hidden;">
+                        <img src="CasaArchivoFamiliar1.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — La Colección">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+                        <div style="aspect-ratio:1; border-radius:4px; overflow:hidden;">
+                            <img src="CasaArchivoFamiliar2.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — Mobile">
+                        </div>
+                        <div style="aspect-ratio:1; background:#2a2926; border-radius:4px; display:flex; align-items:center; justify-content:center;">
+                            <span style="font-family:'Unbounded',sans-serif; font-size:clamp(0.9rem,2vw,1.5rem); font-weight:300; color:var(--gray); letter-spacing:0.2em; text-align:center; line-height:1.5; opacity:0.4;">1926<br>·<br>2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="02" data-proj-img="globologiaprojectcard.jpg" data-proj-title="Globología" data-proj-cat="Product Development · Publishing · Go-to-Market" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">02</span>
+                <span class="project-cat">Product Development · Publishing · Go-to-Market · 2023–Present</span>
+            </div>
+            <div style="display:block; overflow:hidden; margin-bottom:1.5rem; border-radius:6px; aspect-ratio:16/7; position:relative;">
+                <img src="globologiaprojectcard.jpg" style="width:100%;height:100%;object-fit:cover;filter:blur(24px) brightness(0.15);transform:scale(1.1);" alt="Globología">
+                <div style="
+                    position:absolute;inset:0;
+                    background: conic-gradient(
+                        from 0deg at 50% 50%,
+                        hsla(0,80%,55%,0.55),
+                        hsla(45,80%,55%,0.55),
+                        hsla(90,80%,55%,0.55),
+                        hsla(135,80%,55%,0.55),
+                        hsla(180,80%,55%,0.55),
+                        hsla(225,80%,55%,0.55),
+                        hsla(270,80%,55%,0.55),
+                        hsla(315,80%,55%,0.55),
+                        hsla(360,80%,55%,0.55)
+                    );
+                    mix-blend-mode: normal;
+                    border-radius:6px;
+                "></div>
+                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-radius:6px;"></div>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;">
+                    <span style="font-family:'Unbounded',sans-serif;font-size:clamp(0.7rem,2.5vw,0.9rem);letter-spacing:0.35em;text-transform:uppercase;color:rgba(249,248,246,0.95);font-weight:400;">Coming Soon</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">Globología</h2>
+                    <p class="project-desc" style="font-size:1rem;line-height:1.7;color:var(--text);">
+                        As co-founder of L.A. Creative Works, I led the development of Globología from concept to market. Responsibilities included brand identity, publishing infrastructure, digital presence, and go-to-market strategy. Distribution was secured through Globos Payaso, the world's largest balloon supplier. The GTM plan earned an invitation to the 2025 Guinness World Record event in Guadalajara.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Co-Founder, Brand &amp; Marketing Strategy</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Product Development, GTM, Brand, Publishing</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Distribution</div>
+                            <div class="detail-value">Globos Payaso</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value">Coming Soon</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1rem;">
+                    <div style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray);font-weight:500;margin-bottom:0.25rem;">Publishing · Production · Go-to-Market Strategy</div>
+                    <div style="background:#222220;padding:1.75rem;border-radius:4px;">
+                        <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.6rem;font-weight:500;">Brand &amp; Product</div>
+                        <p style="font-size:0.9rem;color:var(--text);line-height:1.6;">Built the brand identity, product concept, and publishing infrastructure. This included ISBN acquisition, copyright registration, and Library of Congress cataloging.</p>
+                    </div>
+                    <div style="background:#222220;padding:1.75rem;border-radius:4px;">
+                        <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.6rem;font-weight:500;">Go-to-Market Strategy</div>
+                        <p style="font-size:0.9rem;color:var(--text);line-height:1.6;">Developed a full GTM plan covering positioning, messaging, and distribution channels. The pre-launch strategy earned an invitation to the 2025 Guinness World Record event in Guadalajara.</p>
+                    </div>
+                    <div style="background:#222220;padding:1.75rem;border-radius:4px;">
+                        <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.6rem;font-weight:500;">Digital Infrastructure</div>
+                        <p style="font-size:0.9rem;color:var(--text);line-height:1.6;">Designed and developed the product's digital presence, including the landing page and brand ecosystem. Currently in final stages before launch.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="03" data-proj-img="BDN Banner option 1.jpg" data-proj-title="Balloon Designs by Nina" data-proj-cat="Brand Identity · Operations · Web Design" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">03</span>
+                <span class="project-cat">Brand Identity · Operations · Web Design · 2023–Present</span>
+            </div>
+            <div class="project-image" onclick="openLightbox(this.querySelector('img').src)">
+                <img src="BDN Banner option 1.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Balloon Designs by Nina website">
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">Balloon Designs<br>by Nina</h2>
+                    <p class="project-desc">
+                        Full rebrand and digital transformation for an event company with over 20 years in business. Work included a complete visual identity redesign, website design and launch, and operational systems modernization. The brand now supports Fortune 500 event contracts.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Brand Designer, Ops &amp; Digital Lead</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Identity, Web, Operations, Marketing</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Clients</div>
+                            <div class="detail-value">Coca-Cola, Kaiser, Dodgers, LA Rams, Amazon</div>
+                        </div>
+                    </div>
+                    <a href="https://balloonsbynina.com" target="_blank" rel="noopener" class="project-link">Visit balloonsbynina.com ↗</a>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                    <div class="img-grid-3">
+                        <img src="bdn-logo-breakdown.png" alt="BDN brand breakdown" style="width:100%;height:100%;object-fit:cover;" />
+                        <img src="bdn-icon-white-on-navy.png" alt="BDN balloon icon" style="width:100%;height:100%;object-fit:cover;" />
+                        <img src="bdn-logo-white-on-navy.png" alt="BDN logo on navy" style="width:100%;height:100%;object-fit:cover;" />
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="04" data-proj-img="a-charmed-gathering-website.png" data-proj-title="A Charmed Gathering" data-proj-cat="Creative Direction · Experience Design" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">04</span>
+                <span class="project-cat">Creative Direction · Experience Design · Print · Web · 2025</span>
+            </div>
+            <div class="project-image">
+                <img src="a-charmed-gathering-website.png" style="width:100%;height:100%;object-fit:cover;" alt="A Charmed Gathering website">
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">A Charmed<br>Gathering</h2>
+                    <p class="project-desc">
+                        A themed birthday dinner combining Harry Potter and Charmed. Guests received physical linen invitations by mail with a QR code linking to a password-protected website. The password was a puzzle with one hint. The site revealed a digital invitation styled as a nighttime manor. The event itself featured floating candles, draped fabric, and a custom balloon arch.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Creative Director &amp; Host</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Deliverables</div>
+                            <div class="detail-value">Print Invitations, Website, Event Design</div>
+                        </div>
+                    </div>
+                    <a href="https://cesenative.my.canva.site/27" target="_blank" rel="noopener" class="project-link">Visit the site ↗</a>
+                </div>
+                <div class="img-grid-2">
+                    <img src="a-charmed-gathering-invie-front.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation front">
+                    <img src="a-charmed-gathering-invite-back.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation back">
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="05" data-proj-img="lugosprojectcard.jpg" data-proj-title="Lugo's Barbershop" data-proj-cat="Brand Identity · Print" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">05</span>
+                <span class="project-cat">Brand Identity · Print · 2023</span>
+            </div>
+            <div class="project-image" style="border-radius:6px; overflow:hidden;">
+                <img src="lugosprojectcard.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Lugo's Barbershop">
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">Lugo's<br>Barbershop</h2>
+                    <p class="project-desc">
+                        Brand identity for an independent barbershop established in 2010. Designed the circular badge logo and produced three price list directions with distinct visual approaches: editorial airmail, barber pole stripes, and a clean modern layout. All files delivered print-ready and are currently displayed in the shop.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Brand Designer</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Identity, Collateral, Print</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Client</div>
+                            <div class="detail-value">Independent Client</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-grid-2" style="align-content:start;">
+                    <img src="lugos-price-list.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list barber pole">
+                    <img src="lugos-alt-pricelist.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list airmail">
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="06" data-proj-img="MYARTISANBAKERY.png" data-proj-title="My Artisan Bakery" data-proj-cat="Brand Identity · Packaging · Merchandise" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">06</span>
+                <span class="project-cat">Brand Identity · Packaging · Merchandise · 2024</span>
+            </div>
+            <div class="project-image" style="border-radius:6px; overflow:hidden;">
+                <img src="MYARTISANBAKERY.png" style="width:100%;height:100%;object-fit:cover;" alt="My Artisan Bakery">
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">My Artisan<br>Bakery</h2>
+                    <p class="project-desc">
+                        Brand identity for a home bakery, covering naming, visual identity, packaging, and merchandise. Developed multiple logo directions, created a custom illustrated mascot with pose variants, designed ingredient labels for sourdough and jalapeno cheddar bagels, and produced tote bag and market banner mockups.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">Brand Designer</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Identity, Packaging, Merchandise</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Deliverables</div>
+                            <div class="detail-value">Logo, Labels, Tote, Banner</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;align-content:start;">
+                    <img src="MY-ARTISAN-BAKERY-ALT-LOGOS.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Logo directions">
+                    <img src="MY-ARTISAN-BAKERY-BAKER-BEAR.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Baker Bear character">
+                    <img src="MY-ARTISAN-BAKERY-MOCKUP00001.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Tote bag">
+                    <img src="MY-ARTISAN-BAKERY-MOCKUP00002.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Market banner">
+                </div>
+            </div>
+        </article>
+
+        <article class="project project-full" data-proj-num="07" data-proj-img="hm_20_6.jpg" data-proj-title="Personal Work" data-proj-cat="Fan Branding · Art Direction · Concept Design" data-proj-dark="false">
+            <div class="project-header">
+                <span class="project-num">07</span>
+                <span class="project-cat">Fan Branding · Art Direction · Concept Design · Personal</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.4rem;margin-bottom:1.5rem;border-radius:6px;overflow:hidden;">
+                <img src="hm_20_6.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center top;" alt="HM20">
+                <img src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;" alt="Lorena">
+                <img src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center 20%;" alt="Fan Posters">
+            </div>
+            <div class="project-body">
+                <div>
+                    <h2 class="project-title">Personal<br>Work</h2>
+                    <p class="project-desc">
+                        Work made without a brief. Three projects built around things I actually care about — a fan identity system for Hannah Montana's 20th anniversary, a two-act vinyl portrait of my mom, and a series of fully art-directed fan posters for Charmed, Scream, and The Truman Show.
+                    </p>
+                    <div class="project-details">
+                        <div class="detail">
+                            <div class="detail-label">Projects</div>
+                            <div class="detail-value">HM20 · Lorena · Fan Posters</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Scope</div>
+                            <div class="detail-value">Identity, Album Art, Poster Design</div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-label">Type</div>
+                            <div class="detail-value">Fan / Personal / Conceptual</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1rem;">
+                    <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);">
+                        <img src="hm_20_6.jpg" style="width:100%;aspect-ratio:16/7;object-fit:cover;object-position:center top;display:block;" alt="HM20">
+                        <div style="padding:0.85rem 1rem 0.5rem;">
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);margin-bottom:0.2rem;text-transform:uppercase;">Fan Branding · 2024</div>
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-0.01em;">HM20</div>
+                        </div>
+                        <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+                            <img src="hm_20_4.jpg" style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;" alt="HM20 logo">
+                            <img src="hm_20_badges.jpg" style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;" alt="HM20 badges">
+                        </div>
+                    </div>
+                    <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);">
+                        <img src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:16/7;object-fit:cover;display:block;" alt="Lorena">
+                        <div style="padding:0.85rem 1rem 0.5rem;">
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);margin-bottom:0.2rem;text-transform:uppercase;">Art Direction · 2024</div>
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-0.01em;">Lorena: A Two-Act Portrait</div>
+                        </div>
+                        <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+                            <img src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="La Norteña">
+                            <img src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
+                        </div>
+                    </div>
+                    <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);">
+                        <img src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/7;object-fit:cover;object-position:center 20%;display:block;" alt="Fan Posters">
+                        <div style="padding:0.85rem 1rem 0.5rem;">
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);margin-bottom:0.2rem;text-transform:uppercase;">Concept Design · Personal</div>
+                            <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-0.01em;">Fan Posters &amp; Concepts</div>
+                        </div>
+                        <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+                            <img src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Charmed">
+                            <img src="fan-scream.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Scream">
+                            <img src="fan-truman-show.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Truman Show">
+                            <img src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Vanessa of Wrath">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-inner">
+            <span class="contact-eyebrow">Available for projects</span>
+            <h2 class="contact-big">Let's<br><span class="pop">work.</span></h2>
+            <div class="contact-cards">
+                <a href="mailto:angel@cesenative.com" class="contact-card">
+                    <span class="contact-card-label">Email</span>
+                    <span class="contact-card-value">angel@cesenative.com</span>
+                    <span class="contact-card-arrow">↗</span>
+                </a>
+                <a href="tel:5622294418" class="contact-card">
+                    <span class="contact-card-label">Phone</span>
+                    <span class="contact-card-value">(562) 229-4418</span>
+                    <span class="contact-card-arrow">↗</span>
+                </a>
+                <a href="https://instagram.com/cesenative" target="_blank" class="contact-card">
+                    <span class="contact-card-label">Instagram</span>
+                    <span class="contact-card-value">@cesenative</span>
+                    <span class="contact-card-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+        <img src="Owlita_says_hi.svg" alt="Owlita" class="footer-owlita">
+    </section>
+
+    <footer>
+        <p>© 2026 Cesenative</p>
+        <p>Los Angeles, CA</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Project image">
+    </div>
+
+    <div id="proj-drawer" style="
+        display:none;
+        position:fixed; inset:0; z-index:500;
+        background:rgba(0,0,0,0.6);
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
+        align-items:flex-end;
+        overscroll-behavior: contain;
+    ">
+        <div id="proj-drawer-panel" style="
+            background:#1a1916;
+            width:100%;
+            max-height:90vh;
+            border-radius:16px 16px 0 0;
+            overflow-y:auto;
+            transform:translateY(100%);
+            transition:transform 0.4s cubic-bezier(0.32,0.72,0,1);
+            -webkit-overflow-scrolling:touch;
+        ">
+            <div style="position:sticky;top:0;background:#1a1916;padding:1rem 1.25rem 0.5rem;display:flex;justify-content:space-between;align-items:center;z-index:2;border-bottom:1px solid #2a2926;">
+                <span id="drawer-num" style="font-family:'Unbounded',sans-serif;font-size:0.5rem;letter-spacing:0.2em;color:var(--gray);font-weight:300;"></span>
+                <button onclick="closeDrawer()" style="background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--gray);line-height:1;padding:0.25rem;">×</button>
+            </div>
+            <div id="drawer-content" style="padding:1.25rem;"></div>
+        </div>
+    </div>
+
+    <style>
+        /* ── MOBILE PROJECT CARDS ── */
+        @media (max-width: 860px) {
+            /* Hide full desktop project content on mobile */
+            .project .project-header,
+            .project .project-body,
+            .project > [style*="aspect-ratio"],
+            .project > .project-image,
+            .project > [style*="overflow:hidden"],
+            .project > [style*="display:block"] {
+                display: none !important;
+            }
+
+            /* Show the mobile tap card instead */
+            .mobile-proj-card {
+                display: flex !important;
+            }
+
+            /* Compact the work section */
+            .work { padding: 2rem 1.25rem 0.5rem; }
+            .work-header { margin-bottom: 1.5rem; }
+        }
+
+        /* The tap card — hidden on desktop */
+        .mobile-proj-card {
+            display: none;
+            flex-direction: column;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-proj-card:active { transform: scale(0.98); }
+
+        .mobile-proj-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .mobile-proj-card-info {
+            padding: 0.85rem 1rem;
+            background: rgba(17,17,16,0.96);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #252422;
+        }
+
+        .mobile-proj-card-info.dark {
+            background: var(--black);
+            border-top-color: rgba(255,255,255,0.08);
+        }
+
+        .mobile-proj-card-left { flex:1; }
+
+        .mobile-proj-card-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.45rem;
+            letter-spacing: 0.2em;
+            color: var(--gray);
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+        }
+
+        .mobile-proj-card-num.dark { color: rgba(249,248,246,0.3); }
+
+        .mobile-proj-card-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .mobile-proj-card-title.dark { color: var(--white); }
+
+        .mobile-proj-card-cat {
+            font-size: 0.6rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .mobile-proj-card-cat.dark { color: rgba(249,248,246,0.35); }
+
+        .mobile-proj-card-arrow {
+            font-size: 1.1rem;
+            color: var(--gray);
+            padding-left: 0.75rem;
+        }
+
+        .mobile-proj-card-arrow.dark { color: rgba(249,248,246,0.3); }
+
+        #proj-drawer-panel.is-dark { background: #111110; }
+        #proj-drawer-panel.is-dark #drawer-num { color: rgba(249,248,246,0.3); }
+        #proj-drawer-panel.is-dark > div:first-child { background: #111110; border-bottom-color: rgba(255,255,255,0.08); }
+    </style>
+
+    <script>
+        // Parallax scroll effect for Nav and Hero
+        const heroName = document.querySelector('.hero-giant-name');
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            const vh = window.innerHeight;
+            const progress = Math.min(y / vh, 1);
+            if (heroName) {
+                heroName.style.transform = `translateY(${progress * -60}px)`;
+                heroName.style.opacity = 1 - progress * 1.4;
+            }
+            if (nav) nav.classList.toggle('scrolled', y > vh * 0.5);
+        }, { passive: true });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.project').forEach(el => {
+            el.classList.add('animate-hidden');
+            io.observe(el);
+        });
+
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = src;
+            lb.classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+        /* --- MOBILE CARD & DRAWER LOGIC --- */
+        const isMobile = () => window.innerWidth <= 860;
+
+        document.querySelectorAll('.project[data-proj-num]').forEach(article => {
+            const num   = article.dataset.projNum;
+            const img   = article.dataset.projImg;
+            const title = article.dataset.projTitle;
+            const cat   = article.dataset.projCat;
+            const dark  = article.dataset.projDark === 'true';
+
+            const card = document.createElement('div');
+            card.className = 'mobile-proj-card';
+
+            // Exception: Globología gets the gradient
+            if (num === "02") {
+                card.innerHTML = `
+                    <div style="width: 100%; aspect-ratio: 16/9; background: #111110; position: relative; overflow: hidden;">
+                        <div style="position: absolute; inset: 0; background: conic-gradient(from 0deg at 50% 50%, hsla(0,80%,55%,0.55), hsla(45,80%,55%,0.55), hsla(90,80%,55%,0.55), hsla(135,80%,55%,0.55), hsla(180,80%,55%,0.55), hsla(225,80%,55%,0.55), hsla(270,80%,55%,0.55), hsla(315,80%,55%,0.55), hsla(360,80%,55%,0.55)); mix-blend-mode: normal;"></div>
+                        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center;">
+                            <span style="font-family: 'Unbounded', sans-serif; font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(249,248,246,0.95);">Coming Soon</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `<img class="mobile-proj-card-img" src="${img}" alt="${title}">`;
+            }
+
+            // Append consistent text container for all cards
+            card.innerHTML += `
+                <div class="mobile-proj-card-info${dark ? ' dark' : ''}">
+                    <div class="mobile-proj-card-left">
+                        <div class="mobile-proj-card-num${dark ? ' dark' : ''}">${num}</div>
+                        <div class="mobile-proj-card-title${dark ? ' dark' : ''}">${title}</div>
+                        <div class="mobile-proj-card-cat${dark ? ' dark' : ''}">${cat}</div>
+                    </div>
+                    <span class="mobile-proj-card-arrow${dark ? ' dark' : ''}">↗</span>
+                </div>
+            `;
+
+            card.addEventListener('click', () => openDrawer(article, dark));
+            article.insertBefore(card, article.firstChild);
+        });
+
+        function openDrawer(article, dark) {
+            if (!isMobile()) return;
+            const drawer = document.getElementById('proj-drawer');
+            const panel  = document.getElementById('proj-drawer-panel');
+            const num    = document.getElementById('drawer-num');
+            const content = document.getElementById('drawer-content');
+
+            content.innerHTML = '';
+            
+            // Clone only the specific project nodes (ignores global hero/nav elements)
+            Array.from(article.childNodes).forEach(node => {
+                if (node.className !== 'mobile-proj-card') {
+                    const clone = node.cloneNode(true);
+                    // Un-hide desktop elements within the drawer environment
+                    if (clone.style) clone.style.removeProperty('display');
+                    if (clone.querySelectorAll) {
+                        clone.querySelectorAll('[style]').forEach(el => {
+                            el.style.removeProperty('display');
+                        });
+                    }
+                    content.appendChild(clone);
+                }
+            });
+
+            num.textContent = article.dataset.projNum;
+            panel.classList.toggle('is-dark', dark);
+            drawer.style.display = 'flex';
+            
+            // NOTE: document.body.style.overflow = 'hidden' is intentionally omitted here 
+            // to prevent the background page from jumping to the top in iOS/Safari.
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    panel.scrollTop = 0;
+                    panel.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        function closeDrawer() {
+            const drawer = document.getElementById('proj-drawer');
+            const panel  = document.getElementById('proj-drawer-panel');
+            panel.style.transform = 'translateY(100%)';
+            setTimeout(() => {
+                drawer.style.display = 'none';
+                document.getElementById('drawer-content').innerHTML = '';
+            }, 400);
+        }
+
+        document.getElementById('proj-drawer').addEventListener('click', function(e) {
+            if (e.target === this) closeDrawer();
+        });
+
+        // Initial Hero Animation
+        (function() {
+            const letters = document.querySelectorAll('.hero-letter');
+            const edges = ['top','bottom','left','right'];
+
+            const getOffset = (edge) => {
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+                const dx = vw * 0.8;
+                const dy = vh * 0.7;
+                if (edge === 'top')    return `translateY(-${dy}px)`;
+                if (edge === 'bottom') return `translateY(${dy}px)`;
+                if (edge === 'left')   return `translateX(-${dx}px)`;
+                if (edge === 'right')  return `translateX(${dx}px)`;
+            };
+
+            letters.forEach(el => {
+                const edge = edges[Math.floor(Math.random() * edges.length)];
+                el.style.transform = getOffset(edge);
+                el.style.transition = 'none';
+            });
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    letters.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
+                            el.classList.add('landed');
+                            el.style.opacity = '1';
+                            el.style.transform = 'translate(0,0)';
+                        }, i * 60);
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
