@@ -101,13 +101,14 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            height: 100svh;
             overflow: visible;
             background: var(--white);
             z-index: 0;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 5.5rem 2.5rem 2.5rem;
+            padding: 5.5rem 2.5rem 15svh;
         }
 
         .tive-letter {
@@ -118,7 +119,11 @@
             text-transform: uppercase;
             color: var(--black);
             line-height: 0.88;
+            will-change: transform, opacity;
         }
+
+        .cesena-tive-line { will-change: transform; }
+        #lineAngel { will-change: transform, opacity; }
 
         .hero-top-bar {
             display: flex;
@@ -264,7 +269,7 @@
             z-index: 20;
             border-radius: 24px 24px 0 0;
             box-shadow: 0 -32px 80px rgba(0,0,0,0.7);
-            margin-top: -2px;
+            margin-top: -40svh;
         }
 
         .work-header {
@@ -1044,7 +1049,7 @@
         </ul>
     </nav>
 
-    <div class="hero-scroll-container" id="heroContainer" style="position:relative;height:280vh;">
+    <div class="hero-scroll-container" id="heroContainer" style="position:relative;height:280vh;height:280svh;">
     <section class="hero" id="heroSticky">
 
         <div class="hero-top-bar">
@@ -1781,13 +1786,21 @@
         }
 
         let targetScale = 1;
+        let lastWidth = window.innerWidth;
         // Recalculate on load and resize
         function initScale() { targetScale = getTargetScale(); }
-        window.addEventListener('resize', initScale);
+        // Only recalc on real width changes (mobile URL bar show/hide fires resize but width is unchanged)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
+                initScale();
+                onScroll();
+            }
+        });
         // Wait for fonts to load then calculate
-        document.fonts.ready.then(initScale);
+        document.fonts.ready.then(() => { initScale(); onScroll(); });
 
-        function onScroll() {
+        function updateScroll() {
             const rect = heroContainer.getBoundingClientRect();
             const scrollable = heroContainer.offsetHeight - window.innerHeight;
             const progress = clamp(-rect.top / scrollable, 0, 1);
@@ -1821,6 +1834,18 @@
                 el.style.opacity   = lv;
                 el.style.transform = `translateY(${lerp(100, 0, lv)}%)`;
             });
+        }
+
+        // rAF throttle — prevents layout thrash on fast scroll, especially on mobile
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
         }
 
         window.addEventListener('scroll', onScroll, { passive: true });
