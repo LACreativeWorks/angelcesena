@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angel Cesena — About</title>
+    <title>About — Angel Cesena</title>
+    <meta property="og:title" content="About — Angel Cesena">
+    <meta property="og:description" content="Creative Operations Strategist & Brand Architect — Los Angeles">
+    <meta property="og:image" content="https://angelcesena.netlify.app/preview.jpg">
+    <meta property="og:url" content="https://angelcesena.netlify.app/about.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600;900&family=Unbounded:wght@300;400;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Barlow+Condensed:wght@800;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=MedievalSharp&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,458 +18,630 @@
             --black: #111110;
             --white: #F9F8F6;
             --gray: #787672;
+            --rule: #252422;
             --accent: #C8B89A;
-            --parchment: #e8d9b5;
-            --ink: #1a0f00;
-            --red: #8B1A1A;
-            --sepia: #6b4c1e;
+            --parchment: #E8D9B5;
+            --parchment-dark: #C9B48A;
+            --ink: #1a1208;
         }
 
-        html, body {
-            height: 100%;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background: var(--black);
             font-family: 'Instrument Sans', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
+
+        img { display: block; max-width: 100%; }
 
         /* ─── NAV ─── */
         .nav {
             position: fixed;
             top: 0; left: 0; right: 0;
-            z-index: 300;
+            z-index: 200;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.25rem 2.5rem;
+            mix-blend-mode: difference;
         }
-
         .nav-name {
             font-family: 'Unbounded', sans-serif;
             font-size: 0.6rem;
             font-weight: 400;
             letter-spacing: 0.2em;
             text-transform: uppercase;
+            color: var(--white);
             text-decoration: none;
-            opacity: 0.6;
-            transition: opacity 0.3s;
         }
-        .nav-name:hover { opacity: 1; }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a {
             font-size: 0.65rem;
             font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: var(--white);
             text-decoration: none;
-            opacity: 0.4;
+            opacity: 0.5;
             transition: opacity 0.2s;
         }
-        .nav-links a:hover { opacity: 0.9; }
-        .nav-links a.active { opacity: 0.9; }
+        .nav-links a.active { opacity: 1; }
+        @media (hover:hover) { .nav-links a:hover { opacity: 1; } }
 
-        body:not(.pro-mode) .nav-name,
-        body:not(.pro-mode) .nav-links a { color: var(--ink); }
-
-        body.pro-mode .nav-name,
-        body.pro-mode .nav-links a { color: var(--white); }
-
-        /* ─── TOGGLE ─── */
-        .toggle-wrap {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 400;
+        /* ═══════════════════════════════
+           PROFESSIONAL VERSION
+        ═══════════════════════════════ */
+        #pro-version {
+            transition: opacity 0.8s ease;
         }
 
-        .toggle-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        #pro-version.hiding {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: var(--white);
+            height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 6rem 0 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-greeting {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 400;
+            color: rgba(17,17,16,0.4);
+            margin-bottom: 0.25rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Edge-to-edge headline — font-size set by JS fitHeadline() */
+        .hero-headline {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            color: var(--black);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .hero-line {
+            display: block;
+            white-space: nowrap;
+            line-height: 0.85;
+        }
+
+        .hero-line.accent { color: var(--accent); }
+
+        .hero-bottom {
+            border-top: 1px solid rgba(17,17,16,0.1);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1.25rem 0.75rem;
+            background: var(--white);
+        }
+
+        .hero-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            border: 1.5px solid rgba(17,17,16,0.25);
+            padding: 0.85rem 1.25rem;
+            border-radius: 100px;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            cursor: pointer;
+            background: none;
+        }
+        @media (hover:hover) { .btn-outline:hover { background: var(--black); color: var(--white); border-color: var(--black); } }
+
+        .btn-solid {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+            background: var(--black);
+            padding: 0.85rem 1.25rem;
+            border-radius: 100px;
+            transition: opacity 0.2s;
+            white-space: nowrap;
             border: none;
+            cursor: pointer;
+        }
+        @media (hover:hover) { .btn-solid:hover { opacity: 0.7; } }
+
+        .btn-magic {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: none;
+            border: 1.5px solid var(--accent);
+            padding: 0.85rem 1.25rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+        @media (hover:hover) { .btn-magic:hover { background: var(--accent); color: var(--black); } }
+
+        /* ─── DARK SECTION ─── */
+        .dark {
+            background: var(--black);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 3rem 1.25rem;
+            border-bottom: 1px solid var(--rule);
+            gap: 1rem;
+        }
+
+        .stat { display: flex; flex-direction: column; gap: 0.3rem; }
+
+        .stat-val {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .stat-label { font-size: 0.72rem; color: var(--gray); }
+
+        .what { padding: 4rem 1.25rem; border-bottom: 1px solid var(--rule); }
+
+        .what-eyebrow {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.42rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(249,248,246,0.2);
+            margin-bottom: 3rem;
+        }
+
+        .what-item {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            padding: 1.75rem 0;
+            border-top: 1px solid var(--rule);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .what-item:last-child { border-bottom: 1px solid var(--rule); }
+        .what-item.visible { opacity: 1; transform: translateY(0); }
+
+        .what-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.4rem;
+            letter-spacing: 0.2em;
+            color: rgba(249,248,246,0.2);
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .what-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.1rem, 4vw, 2rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .resume-section {
+            padding: 3rem 1.25rem;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .resume-label {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.42rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(249,248,246,0.2);
+        }
+
+        .resume-btn {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.48rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: var(--white);
+            text-decoration: none;
+            padding: 1rem 1.75rem;
+            border-radius: 100px;
+            flex-shrink: 0;
+            transition: opacity 0.2s;
+        }
+        @media (hover:hover) { .resume-btn:hover { opacity: 0.8; } }
+
+        /* ─── CONTACT ─── */
+        .contact {
+            background: var(--white);
+            padding: 6rem 1.25rem 4rem;
+        }
+
+        .contact-eyebrow {
+            display: block;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.52rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(17,17,16,0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-big {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3rem, 14vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            color: var(--black);
+            margin-bottom: 3rem;
+        }
+
+        @media (hover:hover) {
+            .contact-big { color: transparent; -webkit-text-stroke: 2px var(--black); transition: color 0.3s; }
+            .contact-big:hover { color: var(--black); }
+        }
+        .contact-big .pop { color: var(--black); -webkit-text-stroke: 0; }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(17,17,16,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .contact-card {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(17,17,16,0.15);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .contact-card:last-child { border-bottom: none; }
+        @media (hover:hover) { .contact-card:hover { background: rgba(17,17,16,0.04); } }
+        .contact-card-label { font-family: 'Unbounded', sans-serif; font-size: 0.42rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(17,17,16,0.4); }
+        .contact-card-value { font-size: 0.78rem; color: var(--black); font-weight: 500; }
+        .contact-card-arrow { font-size: 1rem; color: rgba(17,17,16,0.3); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--black);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            text-align: center;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.45rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(249,248,246,0.2);
+        }
+
+        /* ═══════════════════════════════
+           BOOK OF SHADOWS VERSION
+        ═══════════════════════════════ */
+        #bos-version {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: #0d0a05;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        #bos-version.visible {
+            opacity: 1;
+        }
+
+        .bos-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Full-screen image display */
+        .bos-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+        }
+
+        .bos-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            z-index: 10;
+            background: rgba(17,17,16,0.7);
+            border: none;
+            color: rgba(249,248,246,0.8);
+            font-size: 1.5rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
-            background: var(--ink);
-            position: relative;
-            overflow: hidden;
+            line-height: 1;
+            transition: background 0.2s;
         }
+        @media (hover:hover) { .bos-close:hover { background: rgba(17,17,16,0.95); } }
 
-        .toggle-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
-
-        .toggle-btn svg {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            transition: opacity 0.3s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .icon-mystical { color: var(--parchment); opacity: 1; transform: rotate(0deg); }
-        .icon-pro      { color: var(--ink);       opacity: 0; transform: rotate(90deg); }
-
-        body.pro-mode .toggle-btn { background: var(--parchment); }
-        body.pro-mode .icon-mystical { opacity: 0; transform: rotate(-90deg); }
-        body.pro-mode .icon-pro      { opacity: 1; transform: rotate(0deg); }
-
-        /* ─── INK OVERLAY ─── */
-        .ink-overlay {
+        /* Transition flash */
+        .bos-flash {
             position: fixed;
             inset: 0;
-            z-index: 500;
+            z-index: 400;
+            background: #E8D9B5;
             pointer-events: none;
             opacity: 0;
         }
 
-        #inkCanvas { width: 100%; height: 100%; display: block; }
-
-        /* ─── PAGE WRAPPERS ─── */
-        .page-mystical,
-        .page-professional {
-            min-height: 100vh;
-            width: 100%;
-            position: absolute;
-            top: 0; left: 0;
-        }
-
-        .page-mystical    { opacity: 1; z-index: 1; }
-        .page-professional { opacity: 0; z-index: 0; pointer-events: none; }
-
-        body.pro-mode .page-mystical     { opacity: 0; z-index: 0; pointer-events: none; }
-        body.pro-mode .page-professional { opacity: 1; z-index: 1; pointer-events: auto; }
-
-        /* ─── MYSTICAL PAGE ─── */
-        .page-mystical {
-            background: #c9b88a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4.5rem 1.5rem 3rem;
-        }
-
-        .page-mystical::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 140px rgba(50,28,4,0.35), inset 0 0 60px rgba(70,42,8,0.2);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .bos-image {
-            max-width: 700px;
-            width: 100%;
-            height: auto;
-            display: block;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 32px 100px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.25);
-        }
-
-        /* ─── PROFESSIONAL PAGE ─── */
-        .page-professional {
-            background: var(--black);
-            display: flex;
-            flex-direction: column;
-            padding: 6rem 2.5rem 4rem;
-            align-items: center;
-        }
-
-        .pro-inner {
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .pro-eyebrow {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 0.5rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            opacity: 0.7;
-        }
-
-        .pro-name {
-            font-family: 'Unbounded', sans-serif;
-            font-size: clamp(2.8rem, 9vw, 8rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            color: var(--white);
-            line-height: 0.88;
-            margin-bottom: 0.15em;
-        }
-
-        .pro-name span { display: block; }
-
-        .pro-name-rule {
-            width: 100%;
-            height: 2px;
-            background: rgba(249,248,246,0.08);
-            margin: 0.2em 0 2.5rem;
-        }
-
-        .pro-grid {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .pro-portrait-box {
-            width: 100%;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(249,248,246,0.08);
-        }
-
-        .pro-portrait-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
-            filter: grayscale(25%) contrast(1.08);
-        }
-
-        .pro-portrait-box::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(17,17,16,0.65) 100%);
-        }
-
-        .pro-bio {
-            font-size: 0.95rem;
-            line-height: 1.95;
-            color: rgba(249,248,246,0.45);
-            font-style: italic;
-            margin-bottom: 2.5rem;
-        }
-
-        .pro-abilities-label {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 0.45rem;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
-            color: var(--accent);
-            opacity: 0.6;
-            margin-bottom: 1rem;
-        }
-
-        .pro-abilities-list {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .pro-abilities-list li {
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: var(--white);
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(249,248,246,0.07);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pro-abilities-list li::after {
-            content: '↗';
-            color: var(--accent);
-            opacity: 0.35;
-            font-size: 0.7rem;
-        }
-
-        .pro-mythos {
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(249,248,246,0.07);
-            font-size: 0.82rem;
-            line-height: 1.85;
-            color: rgba(249,248,246,0.25);
-            font-style: italic;
-            max-width: 520px;
-        }
-
-        .pro-portrait-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 640px) {
-            .pro-grid { grid-template-columns: 1fr; }
-            .nav { padding: 1rem 1.25rem; }
-            .page-professional { padding: 5rem 1.25rem 3rem; }
-            .toggle-wrap { bottom: 1.25rem; right: 1.25rem; }
+        @media (min-width: 600px) {
+            .hero { padding: 7rem 0 0; }
+            .hero-bottom { padding: 1.5rem 1.25rem; }
+            .stats { padding: 3rem 2.5rem; }
+            .what { padding: 4rem 2.5rem; }
+            .resume-section { padding: 3rem 2.5rem; }
+            .contact { padding: 6rem 2.5rem 4rem; }
+            footer { flex-direction: row; justify-content: space-between; padding: 1.25rem 2.5rem; }
+            .contact-cards { flex-direction: row; }
+            .contact-card { flex-direction: column; border-bottom: none; border-right: 1px solid rgba(17,17,16,0.15); }
+            .contact-card:last-child { border-right: none; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav">
-        <a href="/" class="nav-name">Angel Cesena</a>
-        <ul class="nav-links">
-            <li><a href="/">Work</a></li>
-            <li><a href="/about" class="active">About</a></li>
-        </ul>
-    </nav>
+<nav class="nav">
+    <a href="index.html" class="nav-name">Angel Cesena</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <div class="toggle-wrap">
-        <button class="toggle-btn" onclick="toggleMode()" aria-label="Toggle view">
-            <svg class="icon-mystical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-            </svg>
-            <svg class="icon-pro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="1"/>
-                <line x1="3" y1="9" x2="21" y2="9"/>
-                <line x1="9" y1="21" x2="9" y2="9"/>
-            </svg>
-        </button>
-    </div>
+<!-- PROFESSIONAL VERSION -->
+<div id="pro-version">
 
-    <div class="ink-overlay" id="inkOverlay">
-        <canvas id="inkCanvas"></canvas>
-    </div>
+    <section class="hero">
+        <p class="hero-greeting">Hii, I'm Angel.</p>
+        <h1 class="hero-headline">
+            <span class="hero-line">Creative</span>
+            <span class="hero-line">Operations</span>
+            <span class="hero-line">Strategist</span>
+            <span class="hero-line accent">& Brand</span>
+            <span class="hero-line accent">Architect.</span>
+        </h1>
+        <div class="hero-bottom">
+            <button class="btn-magic" id="magic-btn" onclick="triggerMagic()">Another Side</button>
+        </div>
+    </section>
 
-    <!-- MYSTICAL -->
-    <div class="page-mystical" id="pageMystical">
-        <img class="bos-image" src="angel-bos-about2.png" alt="Angel Cesena — Book of Shadows">
-    </div>
-
-    <!-- PROFESSIONAL -->
-    <div class="page-professional" id="pageProfessional">
-        <div class="pro-inner">
-            <div class="pro-eyebrow">COO · Co-Founder · Creative Strategist</div>
-            <div class="pro-name">
-                <span>Angel</span>
-                <span>Cesena</span>
+    <div class="dark">
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-val">7+</span>
+                <span class="stat-label">Years experience</span>
             </div>
-            <div class="pro-name-rule"></div>
-
-            <div class="pro-grid">
-                <div>
-                    <p class="pro-bio">Angel Cesena is a creative operations strategist and brand architect based in Los Angeles.</p>
-
-                    <p class="pro-bio" style="margin-top:-1.5rem;">With over seven years across brand strategy, creative direction, and operational infrastructure, he has led the build of identities, systems, and experiences for clients across entertainment, hospitality, and the arts. He currently serves as COO and Co-Founder of L.A. Creative Works LLC.</p>
-
-                    <div class="pro-abilities-label">Capabilities</div>
-                    <ul class="pro-abilities-list">
-                        <li>Brand Identity</li>
-                        <li>Creative Operations</li>
-                        <li>Systems Architecture</li>
-                        <li>Strategic Storytelling</li>
-                        <li>The Full Build</li>
-                    </ul>
-                </div>
-
-                <div class="pro-portrait-box">
-                    <div class="pro-portrait-placeholder">
-                        <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="15" r="7" stroke="rgba(249,248,246,0.15)" stroke-width="1.5"/>
-                            <path d="M6 38c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="rgba(249,248,246,0.15)" stroke-width="1.5"/>
-                        </svg>
-                    </div>
-                </div>
+            <div class="stat">
+                <span class="stat-val">EN/ES</span>
+                <span class="stat-label">Native bilingual</span>
             </div>
+        </div>
+
+        <div class="what">
+            <div class="what-eyebrow">What I do</div>
+            <div class="what-item">
+                <span class="what-num">01</span>
+                <span class="what-title">Brand Identity</span>
+            </div>
+            <div class="what-item">
+                <span class="what-num">02</span>
+                <span class="what-title">Creative Direction</span>
+            </div>
+            <div class="what-item">
+                <span class="what-num">03</span>
+                <span class="what-title">Go-to-Market Strategy</span>
+            </div>
+            <div class="what-item">
+                <span class="what-num">04</span>
+                <span class="what-title">Ops & Systems</span>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <span class="resume-label">Full resume available</span>
+            <a href="Angel_Cesena_Resume_02_2026_pdf.pdf" target="_blank" class="resume-btn">View Resume</a>
         </div>
     </div>
 
-    <script>
-        let isPro     = false;
-        let animating = false;
+    <section class="contact">
+        <span class="contact-eyebrow">Available for projects</span>
+        <h2 class="contact-big">Let's<br><span class="pop">work.</span></h2>
+        <div class="contact-cards">
+            <a href="mailto:angelcesena.studio@gmail.com" class="contact-card">
+                <span class="contact-card-label">Email</span>
+                <span class="contact-card-value">angelcesena.studio@gmail.com</span>
+                <span class="contact-card-arrow">&#8599;</span>
+            </a>
+            <a href="https://instagram.com/cesenative" target="_blank" class="contact-card">
+                <span class="contact-card-label">Instagram</span>
+                <span class="contact-card-value">@cesenative</span>
+                <span class="contact-card-arrow">&#8599;</span>
+            </a>
+            <a href="https://linkedin.com/in/angelcesena" target="_blank" class="contact-card">
+                <span class="contact-card-label">LinkedIn</span>
+                <span class="contact-card-value">Angel Cesena</span>
+                <span class="contact-card-arrow">&#8599;</span>
+            </a>
+            <a href="https://contra.com/angel_cesena_3ro4bph7" target="_blank" class="contact-card">
+                <span class="contact-card-label">Contra</span>
+                <span class="contact-card-value">@angel_cesena</span>
+                <span class="contact-card-arrow">&#8599;</span>
+            </a>
+        </div>
+    </section>
 
-        function toggleMode() {
-            if (animating) return;
-            animating = true;
+    <footer>
+        <p>2026 Cesenative · L.A. Creative Works LLC</p>
+        <p>Los Angeles, CA</p>
+    </footer>
 
-            const overlay  = document.getElementById('inkOverlay');
-            const canvas   = document.getElementById('inkCanvas');
-            const ctx      = canvas.getContext('2d');
+</div>
 
-            canvas.width  = window.innerWidth;
-            canvas.height = window.innerHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+<!-- BOOK OF SHADOWS VERSION -->
+<div id="bos-version">
+    <button class="bos-close" onclick="closeBos()">&#215;</button>
+    <div class="bos-inner">
+        <img class="bos-image" src="Angel-bos-card.png" alt="Angel Cesena — The Cesenative">
+    </div>
+</div>
 
-            overlay.style.opacity       = '1';
-            overlay.style.pointerEvents = 'all';
+<script>
+    // Each line independently fills the full viewport width
+    function fitHeadline() {
+        const hl = document.querySelector('.hero-headline');
+        const hero = document.querySelector('.hero');
+        if (!hl || !hero) return;
 
-            const ox       = canvas.width  / 2;
-            const oy       = canvas.height / 2;
-            const maxR     = Math.sqrt(ox * ox + oy * oy) + 80;
-            const inkFill  = isPro ? '#c9b88a' : '#060300';
-            const duration = 820;
-            let   startTime = null;
-            let   switched  = false;
+        const lines = hl.querySelectorAll('.hero-line');
+        const targetW = hero.clientWidth;
 
-            function drawFrame(ts) {
-                if (!startTime) startTime = ts;
-                const t     = Math.min((ts - startTime) / duration, 1);
-                const ease  = t < 0.5
-                    ? 2 * t * t
-                    : 1 - Math.pow(-2 * t + 2, 2) / 2;
-                const r = maxR * ease;
+        lines.forEach(line => {
+            line.style.fontSize = '100px';
+            line.style.fontSize = Math.floor(100 * targetW / line.scrollWidth) + 'px';
+        });
+    }
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fitHeadline();
+    window.addEventListener('resize', fitHeadline);
 
-                ctx.beginPath();
-                const pts = 160;
-                for (let i = 0; i <= pts; i++) {
-                    const a   = (i / pts) * Math.PI * 2;
-                    const jag = 1
-                        + Math.sin(a * 11 + t * 14) * 0.032 * (1 - ease * 0.5)
-                        + Math.sin(a * 19 + t *  8) * 0.018 * (1 - ease * 0.5)
-                        + Math.sin(a *  5 + t * 22) * 0.011;
-                    const pr = r * jag;
-                    const x  = ox + Math.cos(a) * pr;
-                    const y  = oy + Math.sin(a) * pr;
-                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-                }
-                ctx.closePath();
+    // Scroll-in animations
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.what-item').forEach(el => io.observe(el));
 
-                const grd = ctx.createRadialGradient(ox, oy, 0, ox, oy, r * 1.05);
-                grd.addColorStop(0,    inkFill);
-                grd.addColorStop(0.8,  inkFill);
-                grd.addColorStop(1,    'transparent');
-                ctx.fillStyle = grd;
-                ctx.fill();
+    // Magic particles
+    function triggerMagic() {
+        const pro = document.getElementById('pro-version');
+        const bos = document.getElementById('bos-version');
 
-                if (t >= 0.5 && !switched) {
-                    switched = true;
-                    isPro    = !isPro;
-                    document.body.classList.toggle('pro-mode', isPro);
-                }
+        // Brief warm flash
+        const flash = document.createElement('div');
+        flash.className = 'bos-flash';
+        document.body.appendChild(flash);
+        flash.style.transition = 'opacity 0.2s ease';
+        requestAnimationFrame(() => {
+            flash.style.opacity = '0.35';
+            setTimeout(() => {
+                flash.style.transition = 'opacity 0.5s ease';
+                flash.style.opacity = '0';
+                setTimeout(() => flash.remove(), 600);
+            }, 200);
+        });
 
-                if (t < 1) {
-                    requestAnimationFrame(drawFrame);
-                } else {
-                    overlay.style.opacity       = '0';
-                    overlay.style.pointerEvents = 'none';
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    animating = false;
-                }
-            }
+        // Fade + blur out pro version
+        pro.style.transition = 'opacity 0.35s ease, filter 0.35s ease';
+        pro.style.filter = 'blur(6px)';
+        pro.style.opacity = '0';
+        pro.style.pointerEvents = 'none';
 
-            requestAnimationFrame(drawFrame);
-        }
-    </script>
+        // Fade in BOS
+        setTimeout(() => {
+            pro.style.display = 'none';
+            bos.style.display = 'block';
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                bos.classList.add('visible');
+            }));
+        }, 380);
+    }
+
+    function closeBos() {
+        const bos = document.getElementById('bos-version');
+        const pro = document.getElementById('pro-version');
+
+        bos.classList.remove('visible');
+        setTimeout(() => {
+            bos.style.display = 'none';
+            pro.style.display = '';
+            pro.style.filter = '';
+            pro.style.opacity = '';
+            pro.style.transition = '';
+            pro.style.pointerEvents = '';
+        }, 800);
+    }
+</script>
+
 </body>
 </html>
