@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://angelcesena.netlify.app/about.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Barlow+Condensed:wght@800;900&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=MedievalSharp&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Barlow+Condensed:wght@800;900&family=Bebas+Neue&&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=MedievalSharp&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -47,11 +47,9 @@
             top: 0; left: 0; right: 0;
             z-index: 200;
             display: flex;
-            justify-content: flex-start;
-            gap: 0;
+            justify-content: space-between;
             align-items: center;
             padding: 1.25rem 2.5rem;
-            mix-blend-mode: difference;
         }
         .nav-name {
             font-family: 'Unbounded', sans-serif;
@@ -61,6 +59,7 @@
             text-transform: uppercase;
             color: var(--white);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links a {
@@ -70,11 +69,14 @@
             text-transform: uppercase;
             color: var(--white);
             text-decoration: none;
-            opacity: 0.5;
-            transition: opacity 0.2s;
+            opacity: 0.6;
+            transition: opacity 0.2s, color 0.3s ease;
         }
         .nav-links a.active { opacity: 1; }
         @media (hover:hover) { .nav-links a:hover { opacity: 1; } }
+
+        .nav.nav-light .nav-name { color: var(--black); }
+        .nav.nav-light .nav-links a { color: var(--black); }
 
         /* ═══════════════════════════════
            PROFESSIONAL VERSION
@@ -90,56 +92,58 @@
 
         /* ─── HERO ─── */
         .hero {
-            background: var(--white);
+            background: var(--black);
             height: 100svh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-end;
             gap: 0;
-            padding: 6rem 0 0;
+            padding: 0 1rem;
             overflow: hidden;
             position: relative;
         }
 
         .hero-greeting {
-            font-family: 'Instrument Sans', sans-serif;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            font-weight: 400;
-            color: rgba(17,17,16,0.4);
-            margin-bottom: 0.25rem;
-            padding-left: 0.5rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            color: rgba(249,248,246,0.45);
+            margin-bottom: 0.2rem;
+            padding-left: 0.15rem;
         }
 
         /* Edge-to-edge headline — font-size set by JS fitHeadline() */
         .hero-headline {
-            font-family: 'Barlow Condensed', sans-serif;
+            font-family: 'Unbounded', sans-serif;
             font-weight: 900;
-            letter-spacing: -0.01em;
             text-transform: uppercase;
-            color: var(--black);
-            flex: 1;
+            color: var(--white);
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-end;
             gap: 0;
             overflow: hidden;
+            padding-bottom: 0.5rem;
         }
 
         .hero-line {
             display: block;
             white-space: nowrap;
             line-height: 0.85;
+            letter-spacing: -0.06em;
         }
 
-        .hero-line.accent { color: var(--accent); }
+        .hero-line.accent {
+            color: #C8B89A;
+        }
 
         .hero-bottom {
-            border-top: 1px solid rgba(17,17,16,0.1);
+            border-top: 1px solid rgba(249,248,246,0.1);
             display: flex;
             justify-content: flex-end;
             align-items: center;
             padding: 1.25rem 0.75rem;
-            background: var(--white);
+            background: var(--black);
         }
 
         .hero-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
@@ -186,37 +190,39 @@
         }
         @media (hover:hover) { .btn-solid:hover { opacity: 0.7; } }
 
+        @keyframes triquetra-pulse {
+            0%, 100% { box-shadow: 0 0 6px 2px rgba(200,184,154,0.12); opacity: 0.6; }
+            50% { box-shadow: 0 0 10px 3px rgba(200,184,154,0.2); opacity: 0.9; }
+        }
+
         .btn-magic {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 0.45rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            justify-content: center;
+            font-size: 1.5rem;
             color: var(--accent);
             background: none;
-            border: 1.5px solid var(--accent);
-            padding: 0.85rem 1.25rem;
+            border: 1.5px solid rgba(200,184,154,0.35);
+            width: 3rem;
+            height: 3rem;
             border-radius: 100px;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-            white-space: nowrap;
+            animation: triquetra-pulse 6s ease-in-out infinite;
+            transition: opacity 0.2s;
         }
-        @media (hover:hover) { .btn-magic:hover { background: var(--accent); color: var(--black); } }
+        @media (hover:hover) { .btn-magic:hover { background: rgba(200,184,154,0.08); } }
 
-        /* ─── DARK SECTION ─── */
+        /* ─── LIGHT SECTION (was dark) ─── */
         .dark {
-            background: var(--black);
-            border-radius: 24px 24px 0 0;
+            background: var(--white);
+            border-radius: 0;
         }
 
         .stats {
             display: flex;
             justify-content: space-around;
             padding: 3rem 1.25rem;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: 1px solid rgba(17,17,16,0.1);
             gap: 1rem;
         }
 
@@ -226,7 +232,7 @@
             font-family: 'Unbounded', sans-serif;
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900;
-            color: var(--white);
+            color: var(--black);
             letter-spacing: -0.04em;
             line-height: 1;
         }
@@ -235,26 +241,26 @@
 
         .bio {
             padding: 3rem 1.25rem;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: 1px solid rgba(17,17,16,0.1);
         }
 
         .bio-text {
             font-family: 'Instrument Sans', sans-serif;
             font-size: clamp(0.95rem, 2.5vw, 1.15rem);
             font-weight: 400;
-            color: rgba(249,248,246,0.65);
+            color: rgba(17,17,16,0.65);
             line-height: 1.6;
             max-width: 640px;
         }
 
-        .what { padding: 4rem 1.25rem; border-bottom: 1px solid var(--rule); }
+        .what { padding: 4rem 1.25rem; border-bottom: 1px solid rgba(17,17,16,0.1); }
 
         .what-eyebrow {
             font-family: 'Unbounded', sans-serif;
             font-size: 0.42rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: rgba(249,248,246,0.2);
+            color: rgba(17,17,16,0.3);
             margin-bottom: 3rem;
         }
 
@@ -263,19 +269,19 @@
             align-items: baseline;
             gap: 1.5rem;
             padding: 1.75rem 0;
-            border-top: 1px solid var(--rule);
+            border-top: 1px solid rgba(17,17,16,0.1);
             opacity: 0;
             transform: translateY(12px);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-        .what-item:last-child { border-bottom: 1px solid var(--rule); }
+        .what-item:last-child { border-bottom: 1px solid rgba(17,17,16,0.1); }
         .what-item.visible { opacity: 1; transform: translateY(0); }
 
         .what-num {
             font-family: 'Unbounded', sans-serif;
             font-size: 0.4rem;
             letter-spacing: 0.2em;
-            color: rgba(249,248,246,0.2);
+            color: rgba(17,17,16,0.25);
             text-transform: uppercase;
             flex-shrink: 0;
         }
@@ -286,7 +292,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: -0.02em;
-            color: var(--white);
+            color: var(--black);
         }
 
         .what-text {
@@ -298,13 +304,13 @@
         .what-desc {
             font-family: 'Instrument Sans', sans-serif;
             font-size: 0.85rem;
-            color: rgba(249,248,246,0.4);
+            color: rgba(17,17,16,0.4);
             line-height: 1.5;
         }
 
         .currently {
             padding: 3rem 1.25rem;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: 1px solid rgba(17,17,16,0.1);
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -315,23 +321,22 @@
             font-size: 0.42rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: rgba(249,248,246,0.2);
+            color: rgba(17,17,16,0.3);
         }
 
         .currently-text {
             font-family: 'Instrument Sans', sans-serif;
             font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-            color: rgba(249,248,246,0.65);
+            color: rgba(17,17,16,0.65);
             line-height: 1.6;
             max-width: 560px;
         }
 
         .resume-section {
             padding: 3rem 1.25rem;
-            border-bottom: 1px solid var(--rule);
+            border-bottom: 1px solid rgba(17,17,16,0.1);
             display: flex;
             justify-content: flex-start;
-            gap: 0;
             align-items: center;
             gap: 1.5rem;
         }
@@ -341,7 +346,7 @@
             font-size: 0.42rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: rgba(249,248,246,0.2);
+            color: rgba(17,17,16,0.3);
         }
 
         .resume-btn {
@@ -350,8 +355,8 @@
             font-weight: 700;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--black);
-            background: var(--white);
+            color: var(--white);
+            background: var(--black);
             text-decoration: none;
             padding: 1rem 1.75rem;
             border-radius: 100px;
@@ -362,7 +367,7 @@
 
         /* ─── CONTACT ─── */
         .contact {
-            background: var(--white);
+            background: var(--black);
             padding: 6rem 1.25rem 4rem;
         }
 
@@ -372,7 +377,7 @@
             font-size: 0.52rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: rgba(17,17,16,0.4);
+            color: rgba(249,248,246,0.4);
             margin-bottom: 1.5rem;
         }
 
@@ -383,20 +388,20 @@
             text-transform: uppercase;
             letter-spacing: -0.04em;
             line-height: 0.9;
-            color: var(--black);
+            color: var(--white);
             margin-bottom: 3rem;
         }
 
         @media (hover:hover) {
-            .contact-big { color: transparent; -webkit-text-stroke: 2px var(--black); transition: color 0.3s; }
-            .contact-big:hover { color: var(--black); }
+            .contact-big { color: transparent; -webkit-text-stroke: 2px var(--white); transition: color 0.3s; }
+            .contact-big:hover { color: var(--white); }
         }
-        .contact-big .pop { color: var(--black); -webkit-text-stroke: 0; }
+        .contact-big .pop { color: var(--white); -webkit-text-stroke: 0; }
 
         .contact-cards {
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(17,17,16,0.15);
+            border: 1px solid rgba(249,248,246,0.15);
             border-radius: 12px;
             overflow: hidden;
         }
@@ -405,19 +410,18 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-            gap: 0;
             align-items: center;
             gap: 0.35rem;
             padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid rgba(17,17,16,0.15);
+            border-bottom: 1px solid rgba(249,248,246,0.15);
             text-decoration: none;
             transition: background 0.2s;
         }
         .contact-card:last-child { border-bottom: none; }
-        @media (hover:hover) { .contact-card:hover { background: rgba(17,17,16,0.04); } }
-        .contact-card-label { font-family: 'Unbounded', sans-serif; font-size: 0.42rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(17,17,16,0.4); }
-        .contact-card-value { font-size: 0.78rem; color: var(--black); font-weight: 500; }
-        .contact-card-arrow { font-size: 1rem; color: rgba(17,17,16,0.3); }
+        @media (hover:hover) { .contact-card:hover { background: rgba(249,248,246,0.04); } }
+        .contact-card-label { font-family: 'Unbounded', sans-serif; font-size: 0.42rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(249,248,246,0.4); }
+        .contact-card-value { font-size: 0.78rem; color: var(--white); font-weight: 500; }
+        .contact-card-arrow { font-size: 1rem; color: rgba(249,248,246,0.3); }
 
         /* ─── FOOTER ─── */
         footer {
@@ -502,7 +506,8 @@
         }
 
         @media (min-width: 600px) {
-            .hero { padding: 7rem 0 0; }
+            .hero { padding: 0; }
+            .hero-greeting { padding-left: 1.25rem; }
             .hero-bottom { padding: 1.5rem 1.25rem; }
             .stats { padding: 3rem 2.5rem; }
             .what { padding: 4rem 2.5rem; }
@@ -531,16 +536,20 @@
 <div id="pro-version">
 
     <section class="hero">
-        <p class="hero-greeting">Hii, I'm Angel.</p>
         <h1 class="hero-headline">
+            <p class="hero-greeting">Hii, I'm Angel.</p>
             <span class="hero-line">Creative</span>
-            <span class="hero-line">Operations</span>
+            <span class="hero-line">OPS</span>
             <span class="hero-line">Strategist</span>
             <span class="hero-line accent">& Brand</span>
-            <span class="hero-line accent">Architect.</span>
+            <span class="hero-line accent">Architect</span>
         </h1>
         <div class="hero-bottom">
-            <button class="btn-magic" id="magic-btn" onclick="triggerMagic()">Another Side</button>
+            <button class="btn-magic" id="magic-btn" onclick="triggerMagic()" aria-label="Another side">
+                <svg width="32" height="29" viewBox="0 0 360 325.639" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m69.954 325.64h-0.003c-21.064-0.002-41.773-3.641-61.549-10.817l-8.402-3.05 1.56-8.803c10.75-60.646 51.99-111.82 108.54-135.48-7.784-60.802 15.912-122.1 63.057-161.74l6.84-5.75 6.844 5.752c47.144 39.633 70.843 100.94 63.056 161.74 56.551 23.661 97.793 74.831 108.54 135.48l1.562 8.801-8.402 3.051c-19.778 7.179-40.486 10.817-61.552 10.817-39.83 0-78.572-13.107-110.05-37.078-31.48 23.97-70.22 37.08-110.05 37.08zm-45.597-27.93c14.78 4.426 30.077 6.662 45.594 6.664 33.656 0 66.429-10.598 93.535-30.049-11.896-11.58-22.138-24.758-30.541-39.312-8.403-14.553-14.695-30.016-18.776-46.107-45.014 20.36-78.384 60.7-89.813 108.81zm172.15-23.39c27.104 19.451 59.874 30.047 93.532 30.047 15.517 0 30.813-2.236 45.595-6.662-11.43-48.105-44.802-88.45-89.814-108.8-4.079 16.092-10.371 31.553-18.773 46.105-8.41 14.55-18.65 27.72-30.55 39.3zm-62.28-92.9c3.574 15.012 9.319 29.426 17.133 42.962 7.813 13.533 17.423 25.717 28.638 36.318 11.211-10.602 20.821-22.785 28.638-36.318 7.813-13.534 13.561-27.95 17.133-42.96-14.786-4.411-30.145-6.641-45.771-6.641-15.63 0-30.99 2.23-45.77 6.64zm45.77-27.9c16.806 0 33.34 2.28 49.317 6.792 4.88-49.16-13.374-98.229-49.319-132.18-35.946 33.951-54.197 83.021-49.315 132.18 15.98-4.51 32.51-6.79 49.32-6.79z" fill="#C8B89A"/>
+                </svg>
+            </button>
         </div>
     </section>
 
@@ -605,7 +614,7 @@
 
     <section class="contact">
         <span class="contact-eyebrow">Available for projects</span>
-        <h2 class="contact-big">Let's<br><span class="pop">work.</span></h2>
+        <h2 class="contact-big">Let's<br><span class="pop">talk.</span></h2>
         <div class="contact-cards">
             <a href="mailto:angelcesena.studio@gmail.com" class="contact-card">
                 <span class="contact-card-label">Email</span>
@@ -646,23 +655,57 @@
 </div>
 
 <script>
-    // Each line independently fills the full viewport width
+    // Measure text width using an off-screen probe — no container/overflow constraints
+    function measureText(text, fontSize, letterSpacing) {
+        const probe = document.createElement('span');
+        probe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;visibility:hidden;white-space:nowrap;' +
+            'font-family:\'Unbounded\',sans-serif;font-weight:900;text-transform:uppercase;' +
+            'font-size:' + fontSize + 'px;letter-spacing:' + letterSpacing + ';';
+        probe.textContent = text;
+        document.body.appendChild(probe);
+        const w = probe.getBoundingClientRect().width;
+        document.body.removeChild(probe);
+        return w;
+    }
+
     function fitHeadline() {
         const hl = document.querySelector('.hero-headline');
         const hero = document.querySelector('.hero');
         if (!hl || !hero) return;
 
         const lines = hl.querySelectorAll('.hero-line');
-        const targetW = hero.clientWidth;
+        const style = window.getComputedStyle(hero);
+        const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const targetW = window.innerWidth - padding;
+        const containerH = hero.clientHeight * 0.85;
+        const maxLineHeight = containerH / (lines.length + 1);
+        const ls = '-0.06em';
 
         lines.forEach(line => {
-            line.style.fontSize = '100px';
-            line.style.fontSize = Math.floor(100 * targetW / line.scrollWidth) + 'px';
+            line.style.letterSpacing = ls;
+            const measuredW = measureText(line.textContent, 100, ls);
+            let newSize = (targetW / measuredW) * 100;
+            if (newSize > maxLineHeight) newSize = maxLineHeight;
+            line.style.fontSize = Math.floor(newSize) + 'px';
         });
     }
 
-    fitHeadline();
+    document.fonts.ready.then(fitHeadline);
     window.addEventListener('resize', fitHeadline);
+
+    // Nav color switch on scroll
+    const nav = document.querySelector('.nav');
+    const hero = document.querySelector('.hero');
+    function updateNav() {
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        if (heroBottom <= 60) {
+            nav.classList.add('nav-light');
+        } else {
+            nav.classList.remove('nav-light');
+        }
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
     // Scroll-in animations
     const io = new IntersectionObserver(entries => {
