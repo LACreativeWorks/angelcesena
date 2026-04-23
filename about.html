@@ -47,7 +47,8 @@
             top: 0; left: 0; right: 0;
             z-index: 200;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 0;
             align-items: center;
             padding: 1.25rem 2.5rem;
             mix-blend-mode: difference;
@@ -93,7 +94,8 @@
             height: 100svh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 0;
             padding: 6rem 0 0;
             overflow: hidden;
             position: relative;
@@ -118,7 +120,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 0;
             overflow: hidden;
         }
 
@@ -230,6 +233,20 @@
 
         .stat-label { font-size: 0.72rem; color: var(--gray); }
 
+        .bio {
+            padding: 3rem 1.25rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .bio-text {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            font-weight: 400;
+            color: rgba(249,248,246,0.65);
+            line-height: 1.6;
+            max-width: 640px;
+        }
+
         .what { padding: 4rem 1.25rem; border-bottom: 1px solid var(--rule); }
 
         .what-eyebrow {
@@ -272,11 +289,49 @@
             color: var(--white);
         }
 
+        .what-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .what-desc {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(249,248,246,0.4);
+            line-height: 1.5;
+        }
+
+        .currently {
+            padding: 3rem 1.25rem;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .currently-eyebrow {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.42rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(249,248,246,0.2);
+        }
+
+        .currently-text {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            color: rgba(249,248,246,0.65);
+            line-height: 1.6;
+            max-width: 560px;
+        }
+
         .resume-section {
             padding: 3rem 1.25rem;
             border-bottom: 1px solid var(--rule);
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 0;
             align-items: center;
             gap: 1.5rem;
         }
@@ -349,7 +404,8 @@
         .contact-card {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 0;
             align-items: center;
             gap: 0.35rem;
             padding: 1.25rem 1.5rem;
@@ -452,7 +508,8 @@
             .what { padding: 4rem 2.5rem; }
             .resume-section { padding: 3rem 2.5rem; }
             .contact { padding: 6rem 2.5rem 4rem; }
-            footer { flex-direction: row; justify-content: space-between; padding: 1.25rem 2.5rem; }
+            footer { flex-direction: row; justify-content: flex-start;
+            gap: 0; padding: 1.25rem 2.5rem; }
             .contact-cards { flex-direction: row; }
             .contact-card { flex-direction: column; border-bottom: none; border-right: 1px solid rgba(17,17,16,0.15); }
             .contact-card:last-child { border-right: none; }
@@ -499,29 +556,50 @@
             </div>
         </div>
 
+        <div class="bio">
+            <p class="bio-text">I'm a creative ops strategist and brand builder. I handle the full stack, brand identity, launch strategy, systems, and whatever falls in between. Co-founder of L.A. Creative Works LLC. Seven years of experience across creative, operations, and client management.</p>
+        </div>
+
         <div class="what">
             <div class="what-eyebrow">What I do</div>
             <div class="what-item">
                 <span class="what-num">01</span>
-                <span class="what-title">Brand Identity</span>
+                <div class="what-text">
+                    <span class="what-title">Brand Identity</span>
+                    <span class="what-desc">Name, mark, voice, visual language. Built to work as a system.</span>
+                </div>
             </div>
             <div class="what-item">
                 <span class="what-num">02</span>
-                <span class="what-title">Creative Direction</span>
+                <div class="what-text">
+                    <span class="what-title">Creative Direction</span>
+                    <span class="what-desc">Confidently yourself.</span>
+                </div>
             </div>
             <div class="what-item">
                 <span class="what-num">03</span>
-                <span class="what-title">Go-to-Market Strategy</span>
+                <div class="what-text">
+                    <span class="what-title">Go-to-Market Strategy</span>
+                    <span class="what-desc">Positioning, sequencing, and launch planning. Getting the right thing in front of the right people at the right time.</span>
+                </div>
             </div>
             <div class="what-item">
                 <span class="what-num">04</span>
-                <span class="what-title">Ops & Systems</span>
+                <div class="what-text">
+                    <span class="what-title">Ops & Systems</span>
+                    <span class="what-desc">Workflows, tools, financial infrastructure, team structure making creative work sustainable.</span>
+                </div>
             </div>
         </div>
 
         <div class="resume-section">
             <span class="resume-label">Full resume available</span>
             <a href="Angel_Cesena_Resume_02_2026_pdf.pdf" target="_blank" class="resume-btn">View Resume</a>
+        </div>
+
+        <div class="currently">
+            <span class="currently-eyebrow">Currently</span>
+            <p class="currently-text">Co-authoring a design theory book for the balloon art industry. Building brand systems for independent creatives. Available for brand identity and creative ops work.</p>
         </div>
     </div>
 
@@ -563,7 +641,7 @@
 <div id="bos-version">
     <button class="bos-close" onclick="closeBos()">&#215;</button>
     <div class="bos-inner">
-        <img class="bos-image" src="Angel-bos-card.png" alt="Angel Cesena — The Cesenative">
+        <img class="bos-image" src="Angel-bos-card.jpg" alt="Angel Cesena — The Cesenative">
     </div>
 </div>
 
