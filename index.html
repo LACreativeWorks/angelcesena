@@ -89,7 +89,6 @@
         .hero-letter {
             display: inline-block;
             opacity: 0;
-            will-change: transform, opacity;
         }
         .hero-letter.landed {
             opacity: 1;
@@ -119,7 +118,6 @@
             text-transform: uppercase;
             color: var(--black);
             line-height: 0.88;
-            will-change: transform, opacity;
         }
 
         .cesena-tive-line { will-change: transform; }
@@ -1776,38 +1774,51 @@
 
         const isMobileHero = () => window.innerWidth <= 860;
 
-        // Calculate exact scale so CESENATIVE fills edge-to-edge
+        // Cache expensive layout reads — only recalculate on resize, not every scroll frame
+        let targetScale = 1;
+        let cachedScrollable = 0;
+        let lastWidth = window.innerWidth;
+
         function getTargetScale() {
             if (!cesenaTiveLine) return 1;
-            const padding = isMobileHero() ? 40 : 0; // 1.25rem × 2 sides ≈ 40px
+            const padding = isMobileHero() ? 40 : 0;
             const available = window.innerWidth - padding;
             const natural = cesenaTiveLine.scrollWidth;
             return available / natural;
         }
 
-        let targetScale = 1;
-        let lastWidth = window.innerWidth;
-        // Recalculate on load and resize
-        function initScale() { targetScale = getTargetScale(); }
-        // Only recalc on real width changes (mobile URL bar show/hide fires resize but width is unchanged)
+        function cacheLayout() {
+            targetScale = getTargetScale();
+            // Read offsetHeight once here instead of inside the scroll handler
+            cachedScrollable = heroContainer.offsetHeight - window.innerHeight;
+        }
+
         window.addEventListener('resize', () => {
             if (window.innerWidth !== lastWidth) {
                 lastWidth = window.innerWidth;
-                initScale();
+                cacheLayout();
                 onScroll();
             }
         });
-        // Wait for fonts to load then calculate
-        document.fonts.ready.then(() => { initScale(); onScroll(); });
+
+        // Hide hero text until fonts load to prevent flash of wrong scale
+        if (cesenaTiveLine) cesenaTiveLine.style.visibility = 'hidden';
+
+        document.fonts.ready.then(() => {
+            cacheLayout();
+            if (cesenaTiveLine) cesenaTiveLine.style.visibility = '';
+            onScroll();
+        });
 
         function updateScroll() {
-            const rect = heroContainer.getBoundingClientRect();
-            const scrollable = heroContainer.offsetHeight - window.innerHeight;
-            const progress = clamp(-rect.top / scrollable, 0, 1);
+            // Use cached scrollable — avoids forced layout reflow on every frame
+            const scrollTop = window.scrollY || window.pageYOffset;
+            const heroTop = heroContainer.offsetTop;
+            const progress = clamp((scrollTop - heroTop) / cachedScrollable, 0, 1);
 
             nav.classList.toggle('scrolled', progress > 0.6);
 
-            // ANGEL fades + shrinks: starts at 0.05, done at 0.45
+            // ANGEL fades + shrinks
             const ap = clamp((progress - 0.05) / 0.40, 0, 1);
             const ae = easeIn(ap);
             lineAngel.style.opacity = 1 - ae;
@@ -1815,7 +1826,7 @@
             lineAngel.style.transformOrigin = 'left center';
             if (nameRuleEl) nameRuleEl.style.opacity = 1 - ae;
 
-            // CESENA scales down: same start as ANGEL (0.05), done at 0.85
+            // CESENA scales
             if (isMobileHero() && cesenaTiveLine) {
                 const sp = clamp((progress - 0.05) / 0.80, 0, 1);
                 const scale = lerp(1, targetScale, easeOut(sp));
@@ -1825,7 +1836,7 @@
                 cesenaTiveLine.style.transform = '';
             }
 
-            // TIVE types in: staggered 0.30 → 0.85
+            // TIVE types in
             tiveLetters.forEach((el, i) => {
                 const ls = 0.30 + i * 0.12;
                 const le = ls + 0.18;
@@ -1836,7 +1847,6 @@
             });
         }
 
-        // rAF throttle — prevents layout thrash on fast scroll, especially on mobile
         let ticking = false;
         function onScroll() {
             if (!ticking) {
@@ -1849,7 +1859,6 @@
         }
 
         window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
 
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
