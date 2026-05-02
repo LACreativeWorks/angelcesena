@@ -89,11 +89,9 @@
         .hero-letter {
             display: inline-block;
             opacity: 0;
+            will-change: transform, opacity;
         }
-        .hero-letter.landed {
-            opacity: 1;
-            transform: translate(0, 0) !important;
-        }
+        /* .hero-letter.landed removed — animation handled entirely via inline styles */
 
         /* ─── HERO ─── */
         .hero {
@@ -102,6 +100,8 @@
             height: 100vh;
             height: 100svh;
             overflow: visible;
+            overflow-x: clip;   /* clips TIVE bleed without creating a scroll container (safe for sticky) */
+            touch-action: pan-y; /* tells iOS: vertical only — stops horizontal drift on scroll start */
             background: var(--white);
             z-index: 0;
             display: flex;
@@ -1759,38 +1759,41 @@
     </style>
 
     <script>
-        // ── CESENATIVE scroll animation ──
+        // ── HERO SYSTEM ──
+        // Refs
         const heroContainer  = document.getElementById('heroContainer');
+        const heroGiantName  = document.getElementById('heroGiantName');
         const lineAngel      = document.getElementById('lineAngel');
         const nameRuleEl     = document.getElementById('nameRule');
         const tiveLetters    = document.querySelectorAll('.tive-letter');
         const cesenaTiveLine = document.querySelector('.cesena-tive-line');
         const nav            = document.querySelector('.nav');
 
+        // Utils
         function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
         function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
         function easeIn(t)  { return t * t * t; }
         function lerp(a, b, t) { return a + (b - a) * t; }
-
         const isMobileHero = () => window.innerWidth <= 860;
 
-        // Cache expensive layout reads — only recalculate on resize, not every scroll frame
-        let targetScale = 1;
+        // Layout cache — expensive reads happen once, not on every scroll frame
+        let targetScale      = 1;
         let cachedScrollable = 0;
-        let lastWidth = window.innerWidth;
+        let cachedHeroTop    = 0;
+        let lastWidth        = window.innerWidth;
+        let entryDone        = false; // gates scroll animation until entry finishes
 
         function getTargetScale() {
             if (!cesenaTiveLine) return 1;
             const padding = isMobileHero() ? 40 : 0;
-            const available = window.innerWidth - padding;
-            const natural = cesenaTiveLine.scrollWidth;
-            return available / natural;
+            return (window.innerWidth - padding) / cesenaTiveLine.scrollWidth;
         }
 
         function cacheLayout() {
-            targetScale = getTargetScale();
-            // Read offsetHeight once here instead of inside the scroll handler
+            targetScale      = getTargetScale();
             cachedScrollable = heroContainer.offsetHeight - window.innerHeight;
+            // getBoundingClientRect + scrollY is more reliable than offsetTop
+            cachedHeroTop    = heroContainer.getBoundingClientRect().top + (window.scrollY || window.pageYOffset);
         }
 
         window.addEventListener('resize', () => {
@@ -1801,42 +1804,33 @@
             }
         });
 
-        // Hide hero text until fonts load to prevent flash of wrong scale
-        if (cesenaTiveLine) cesenaTiveLine.style.visibility = 'hidden';
-
-        document.fonts.ready.then(() => {
-            cacheLayout();
-            if (cesenaTiveLine) cesenaTiveLine.style.visibility = '';
-            onScroll();
-        });
-
+        // ── SCROLL ANIMATION ──
         function updateScroll() {
-            // Use cached scrollable — avoids forced layout reflow on every frame
             const scrollTop = window.scrollY || window.pageYOffset;
-            const heroTop = heroContainer.offsetTop;
-            const progress = clamp((scrollTop - heroTop) / cachedScrollable, 0, 1);
+            const progress  = clamp((scrollTop - cachedHeroTop) / cachedScrollable, 0, 1);
 
             nav.classList.toggle('scrolled', progress > 0.6);
 
-            // ANGEL fades + shrinks
-            const ap = clamp((progress - 0.05) / 0.40, 0, 1);
-            const ae = easeIn(ap);
-            lineAngel.style.opacity = 1 - ae;
-            lineAngel.style.transform = `scale(${lerp(1, 0.5, ae)}) translateY(${lerp(0, -20, ae)}px)`;
-            lineAngel.style.transformOrigin = 'left center';
-            if (nameRuleEl) nameRuleEl.style.opacity = 1 - ae;
+            // ANGEL + CESENA only run after entry animation completes
+            if (entryDone) {
+                const ap = clamp((progress - 0.05) / 0.40, 0, 1);
+                const ae = easeIn(ap);
+                lineAngel.style.opacity         = 1 - ae;
+                lineAngel.style.transform       = `scale(${lerp(1, 0.5, ae)}) translateY(${lerp(0, -20, ae)}px)`;
+                lineAngel.style.transformOrigin = 'left center';
+                if (nameRuleEl) nameRuleEl.style.opacity = 1 - ae;
 
-            // CESENA scales
-            if (isMobileHero() && cesenaTiveLine) {
-                const sp = clamp((progress - 0.05) / 0.80, 0, 1);
-                const scale = lerp(1, targetScale, easeOut(sp));
-                cesenaTiveLine.style.transform = `scale(${scale})`;
-                cesenaTiveLine.style.transformOrigin = 'left center';
-            } else if (cesenaTiveLine) {
-                cesenaTiveLine.style.transform = '';
+                if (isMobileHero() && cesenaTiveLine) {
+                    const sp    = clamp((progress - 0.05) / 0.80, 0, 1);
+                    const scale = lerp(1, targetScale, easeOut(sp));
+                    cesenaTiveLine.style.transform       = `scale(${scale})`;
+                    cesenaTiveLine.style.transformOrigin = 'left center';
+                } else if (cesenaTiveLine) {
+                    cesenaTiveLine.style.transform = '';
+                }
             }
 
-            // TIVE types in
+            // TIVE letters — scroll-driven, always runs independently of entry
             tiveLetters.forEach((el, i) => {
                 const ls = 0.30 + i * 0.12;
                 const le = ls + 0.18;
@@ -1850,10 +1844,7 @@
         let ticking = false;
         function onScroll() {
             if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateScroll();
-                    ticking = false;
-                });
+                requestAnimationFrame(() => { updateScroll(); ticking = false; });
                 ticking = true;
             }
         }
@@ -1864,6 +1855,60 @@
             a.addEventListener('click', e => {
                 const t = document.querySelector(a.getAttribute('href'));
                 if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        // ── ENTRY ANIMATION ──
+        // Hide the entire name block until fonts load AND initial positions are set.
+        // This prevents both the "wrong scale flash" AND the old bug where cesenaTiveLine
+        // was hidden separately — causing CESENA to animate invisibly and snap into place.
+        if (heroGiantName) heroGiantName.style.opacity = '0';
+
+        document.fonts.ready.then(() => {
+            cacheLayout();
+
+            const letters = document.querySelectorAll('.hero-letter');
+            const edges   = ['top', 'bottom', 'left', 'right'];
+            const vw = window.innerWidth, vh = window.innerHeight;
+
+            const getOffset = edge => {
+                const dx = vw * 0.8, dy = vh * 0.7;
+                if (edge === 'top')    return `translateY(-${dy}px)`;
+                if (edge === 'bottom') return `translateY(${dy}px)`;
+                if (edge === 'left')   return `translateX(-${dx}px)`;
+                return `translateX(${dx}px)`;
+            };
+
+            // Snap letters to their starting offscreen positions — no transition yet
+            letters.forEach(el => {
+                el.style.transition = 'none';
+                el.style.transform  = getOffset(edges[Math.floor(Math.random() * edges.length)]);
+                el.style.opacity    = '0';
+            });
+
+            // Reveal the name block — letters are offscreen so nothing visible yet
+            heroGiantName.style.transition = 'opacity 0.1s ease';
+            heroGiantName.style.opacity    = '1';
+
+            // Double rAF ensures the browser paints the initial offset state
+            // before we add transitions — guarantees a visible animation from the right position
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    letters.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
+                            el.style.transform  = 'translate(0, 0)';
+                            el.style.opacity    = '1';
+                        }, i * 60);
+                    });
+
+                    // After the last letter finishes landing, unlock the scroll animation
+                    const totalMs = (letters.length - 1) * 60 + 820;
+                    setTimeout(() => {
+                        entryDone = true;
+                        onScroll(); // sync to whatever scroll position we're at now
+                    }, totalMs);
+                });
             });
         });
 
@@ -1980,57 +2025,22 @@
             if (e.target === this) closeDrawer();
         });
 
-        // Initial Hero Animation
-        (function() {
-            const letters = document.querySelectorAll('.hero-letter');
-            const edges = ['top','bottom','left','right'];
-
-            const getOffset = (edge) => {
-                const vw = window.innerWidth;
-                const vh = window.innerHeight;
-                const dx = vw * 0.8;
-                const dy = vh * 0.7;
-                if (edge === 'top')    return `translateY(-${dy}px)`;
-                if (edge === 'bottom') return `translateY(${dy}px)`;
-                if (edge === 'left')   return `translateX(-${dx}px)`;
-                if (edge === 'right')  return `translateX(${dx}px)`;
-            };
-
-            letters.forEach(el => {
-                const edge = edges[Math.floor(Math.random() * edges.length)];
-                el.style.transform = getOffset(edge);
-                el.style.transition = 'none';
-            });
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    letters.forEach((el, i) => {
-                        setTimeout(() => {
-                            el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
-                            el.classList.add('landed');
-                            el.style.opacity = '1';
-                            el.style.transform = 'translate(0,0)';
-                        }, i * 60);
-                    });
-                });
-            });
-        // ── DESKTOP PROJECT CARDS & MODAL ──
+        /* ── DESKTOP PROJECT CARDS & MODAL ── */
+        // Properly scoped — no longer trapped inside the letter animation IIFE
         function isDesktop() { return window.innerWidth > 860; }
 
-        // Build desktop thumbnail cards for projects 01-06
         if (isDesktop()) {
             document.querySelectorAll('.project[data-proj-num]').forEach(article => {
                 const num   = article.dataset.projNum;
                 const img   = article.dataset.projImg;
                 const title = article.dataset.projTitle;
                 const cat   = article.dataset.projCat;
-                if (num === '06') return; // proj6 (Personal Work) has its own card
+                if (num === '06') return;
 
                 const card = document.createElement('div');
                 card.className = 'desktop-proj-card';
 
                 if (num === '07') {
-                    // Globología — gradient card, no image
                     card.innerHTML = `
                         <div style="width:100%;aspect-ratio:16/9;background:#111110;position:relative;overflow:hidden;">
                             <div style="position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,hsla(0,80%,55%,0.55),hsla(45,80%,55%,0.55),hsla(90,80%,55%,0.55),hsla(135,80%,55%,0.55),hsla(180,80%,55%,0.55),hsla(225,80%,55%,0.55),hsla(270,80%,55%,0.55),hsla(315,80%,55%,0.55),hsla(360,80%,55%,0.55));"></div>
@@ -2061,13 +2071,11 @@
             });
         }
 
-        // Open shared modal with project content
         function openProjModal(article, num, title) {
             if (!isDesktop()) return;
             const modal = document.getElementById('proj-modal');
             const inner = document.getElementById('proj-modal-inner');
 
-            // Clone article content excluding desktop card and mobile card
             inner.innerHTML = '';
             const header = document.createElement('div');
             header.style.cssText = 'margin-bottom:2.5rem;';
@@ -2077,20 +2085,16 @@
             `;
             inner.appendChild(header);
 
-            // Clone project-header, project-image, project-body
-            ['project-header','project-image','project-body'].forEach(cls => {
+            ['project-header', 'project-image', 'project-body'].forEach(cls => {
                 const el = article.querySelector('.' + cls);
                 if (el) {
                     const clone = el.cloneNode(true);
                     clone.style.display = '';
-                    clone.querySelectorAll('[style]').forEach(child => {
-                        child.style.removeProperty('display');
-                    });
+                    clone.querySelectorAll('[style]').forEach(child => child.style.removeProperty('display'));
                     inner.appendChild(clone);
                 }
             });
 
-            // Also clone book-mockup if present
             const mockup = article.querySelector('.book-mockup');
             if (mockup) {
                 const clone = mockup.cloneNode(true);
@@ -2108,7 +2112,6 @@
             document.body.style.overflow = '';
         }
 
-        // Proj7 modal
         function openProj7Modal() {
             if (!isDesktop()) return;
             document.getElementById('proj7-modal').style.display = 'block';
@@ -2119,7 +2122,6 @@
             document.body.style.overflow = '';
         }
 
-        // Close modals on backdrop click
         document.getElementById('proj-modal').addEventListener('click', function(e) {
             if (e.target === this) closeProjModal();
         });
@@ -2130,15 +2132,12 @@
             if (e.key === 'Escape') { closeProjModal(); closeProj7Modal(); }
         });
 
-        // Proj7 hover label
         const p7card = document.querySelector('.proj7-desktop-card');
         if (p7card) {
             const label = p7card.querySelector('.proj7-hover-label');
             p7card.addEventListener('mouseenter', () => { if (label) label.style.opacity = '1'; });
             p7card.addEventListener('mouseleave', () => { if (label) label.style.opacity = '0'; });
         }
-
-        })(); // end IIFE
     </script>
 </body>
 </html>
