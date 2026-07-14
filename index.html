@@ -89,9 +89,11 @@
         .hero-letter {
             display: inline-block;
             opacity: 0;
-            will-change: transform, opacity;
         }
-        /* .hero-letter.landed removed — animation handled entirely via inline styles */
+        .hero-letter.landed {
+            opacity: 1;
+            transform: translate(0, 0) !important;
+        }
 
         /* ─── HERO ─── */
         .hero {
@@ -100,8 +102,6 @@
             height: 100vh;
             height: 100svh;
             overflow: visible;
-            overflow-x: clip;   /* clips TIVE bleed without creating a scroll container (safe for sticky) */
-            touch-action: pan-y; /* tells iOS: vertical only — stops horizontal drift on scroll start */
             background: var(--white);
             z-index: 0;
             display: flex;
@@ -1089,8 +1089,9 @@
                 <span class="project-cat">Digital Archive · Design & Development · 2024—Present</span>
             </div>
             <div class="project-image" style="border-radius:6px; overflow:hidden;">
-                <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-                    <source src="casaarchivofamiliar_screen_recording22222.mov" type="video/mp4">
+                <video autoplay muted loop playsinline preload="metadata" poster="CAF_project_card.png" style="width:100%;height:100%;object-fit:cover;">
+                    <source src="casaarchivofamiliar_screen_recording22222.mov" type="video/quicktime">
+                    <source src="casaarchivofamiliar_screen_recording22222.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="project-body">
@@ -1118,15 +1119,15 @@
                             <div class="detail-value">Live & Growing</div>
                         </div>
                     </div>
-                    <a href="https://casaarchivofamiliar.com" target="_blank" rel="noopener noreferrer" class="project-link">Visit casaarchivofamiliar.com ↗</a>
+                    <a href="https://casaarchivofamiliar.com" target="_blank" rel="noopener" class="project-link">Visit casaarchivofamiliar.com ↗</a>
                 </div>
                 <div style="display:flex; flex-direction:column; gap:0.5rem;">
                     <div style="aspect-ratio:4/3; border-radius:4px; overflow:hidden;">
-                        <img src="CasaArchivoFamiliar1.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — La Colección">
+                        <img loading="lazy" src="CasaArchivoFamiliar1.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — La Colección">
                     </div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
                         <div style="aspect-ratio:1; border-radius:4px; overflow:hidden;">
-                            <img src="CasaArchivoFamiliar2.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — Mobile">
+                            <img loading="lazy" src="CasaArchivoFamiliar2.png" style="width:100%;height:100%;object-fit:cover;" alt="Casa Archivo — Mobile">
                         </div>
                         <div style="aspect-ratio:1; background:#2a2926; border-radius:4px; display:flex; align-items:center; justify-content:center;">
                             <span style="font-family:'Unbounded',sans-serif; font-size:clamp(0.9rem,2vw,1.5rem); font-weight:300; color:var(--gray); letter-spacing:0.2em; text-align:center; line-height:1.5; opacity:0.4;">1926<br>·<br>2026</span>
@@ -1142,7 +1143,7 @@
                 <span class="project-cat">Brand Identity · Operations · Web Design · 2023–Present</span>
             </div>
             <div class="project-image" onclick="openLightbox(this.querySelector('img').src)">
-                <img src="BDN Banner option 1.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Balloon Designs by Nina website">
+                <img loading="lazy" src="BDN Banner option 1.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Balloon Designs by Nina website">
             </div>
             <div class="project-body">
                 <div>
@@ -1164,13 +1165,13 @@
                             <div class="detail-value">Coca-Cola, Kaiser, Dodgers, LA Rams, Amazon</div>
                         </div>
                     </div>
-                    <a href="https://balloonsbynina.com" target="_blank" rel="noopener noreferrer" class="project-link">Visit balloonsbynina.com ↗</a>
+                    <a href="https://balloonsbynina.com" target="_blank" rel="noopener" class="project-link">Visit balloonsbynina.com ↗</a>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:0.5rem;">
                     <div class="img-grid-3">
-                        <img src="bdn-logo-breakdown.png" alt="BDN brand breakdown" style="width:100%;height:100%;object-fit:cover;" />
-                        <img src="bdn-icon-white-on-navy.png" alt="BDN balloon icon" style="width:100%;height:100%;object-fit:cover;" />
-                        <img src="bdn-logo-white-on-navy.png" alt="BDN logo on navy" style="width:100%;height:100%;object-fit:cover;" />
+                        <img loading="lazy" src="bdn-logo-breakdown.png" alt="BDN brand breakdown" style="width:100%;height:100%;object-fit:cover;" />
+                        <img loading="lazy" src="bdn-icon-white-on-navy.png" alt="BDN balloon icon" style="width:100%;height:100%;object-fit:cover;" />
+                        <img loading="lazy" src="bdn-logo-white-on-navy.png" alt="BDN logo on navy" style="width:100%;height:100%;object-fit:cover;" />
                     </div>
                 </div>
             </div>
@@ -1182,7 +1183,7 @@
                 <span class="project-cat">Creative Direction · Experience Design · Print · Web · 2025</span>
             </div>
             <div class="project-image">
-                <img src="a-charmed-gathering-website.png" style="width:100%;height:100%;object-fit:cover;" alt="A Charmed Gathering website">
+                <img loading="lazy" src="a-charmed-gathering-website.png" style="width:100%;height:100%;object-fit:cover;" alt="A Charmed Gathering website">
             </div>
             <div class="project-body">
                 <div>
@@ -1200,11 +1201,11 @@
                             <div class="detail-value">Print Invitations, Website, Event Design</div>
                         </div>
                     </div>
-                    <a href="https://cesenative.my.canva.site/27" target="_blank" rel="noopener noreferrer" class="project-link">Visit the site ↗</a>
+                    <a href="https://cesenative.my.canva.site/27" target="_blank" rel="noopener" class="project-link">Visit the site ↗</a>
                 </div>
                 <div class="img-grid-2">
-                    <img src="a-charmed-gathering-invie-front.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation front">
-                    <img src="a-charmed-gathering-invite-back.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation back">
+                    <img loading="lazy" src="a-charmed-gathering-invie-front.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation front">
+                    <img loading="lazy" src="a-charmed-gathering-invite-back.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;" alt="Invitation back">
                 </div>
             </div>
         </article>
@@ -1215,7 +1216,7 @@
                 <span class="project-cat">Brand Identity · Print · 2023</span>
             </div>
             <div class="project-image" style="border-radius:6px; overflow:hidden;">
-                <img src="lugosprojectcard.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Lugo's Barbershop">
+                <img loading="lazy" src="lugosprojectcard.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Lugo's Barbershop">
             </div>
             <div class="project-body">
                 <div>
@@ -1239,8 +1240,8 @@
                     </div>
                 </div>
                 <div class="img-grid-2" style="align-content:start;">
-                    <img src="lugos-price-list.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list barber pole">
-                    <img src="lugos-alt-pricelist.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list airmail">
+                    <img loading="lazy" src="lugos-price-list.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list barber pole">
+                    <img loading="lazy" src="lugos-alt-pricelist.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#f5f0e8;" alt="Price list airmail">
                 </div>
             </div>
         </article>
@@ -1251,7 +1252,7 @@
                 <span class="project-cat">Brand Identity · Packaging · Merchandise · 2024</span>
             </div>
             <div class="project-image" style="border-radius:6px; overflow:hidden;">
-                <img src="MYARTISANBAKERY.png" style="width:100%;height:100%;object-fit:cover;" alt="My Artisan Bakery">
+                <img loading="lazy" src="MYARTISANBAKERY.png" style="width:100%;height:100%;object-fit:cover;" alt="My Artisan Bakery">
             </div>
             <div class="project-body">
                 <div>
@@ -1275,10 +1276,10 @@
                     </div>
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;align-content:start;">
-                    <img src="MY-ARTISAN-BAKERY-ALT-LOGOS.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Logo directions">
-                    <img src="MY-ARTISAN-BAKERY-BAKER-BEAR.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Baker Bear character">
-                    <img src="MY-ARTISAN-BAKERY-MOCKUP00001.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Tote bag">
-                    <img src="MY-ARTISAN-BAKERY-MOCKUP00002.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Market banner">
+                    <img loading="lazy" src="MY-ARTISAN-BAKERY-ALT-LOGOS.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Logo directions">
+                    <img loading="lazy" src="MY-ARTISAN-BAKERY-BAKER-BEAR.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Baker Bear character">
+                    <img loading="lazy" src="MY-ARTISAN-BAKERY-MOCKUP00001.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Tote bag">
+                    <img loading="lazy" src="MY-ARTISAN-BAKERY-MOCKUP00002.png" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Market banner">
                 </div>
             </div>
         </article>
@@ -1292,9 +1293,9 @@
             <!-- Desktop: clickable collage card (hidden on mobile) -->
             <div class="proj7-desktop-card" onclick="openProj7Modal()" style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden;">
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;">
-                    <img src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;display:block;" alt="HM20">
-                    <img src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;" alt="Lorena">
-                    <img src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;" alt="Fan Posters">
+                    <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;display:block;" alt="HM20">
+                    <img loading="lazy" src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;" alt="Lorena">
+                    <img loading="lazy" src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;" alt="Fan Posters">
                 </div>
                 <div style="position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.3)'" onmouseout="this.style.background='rgba(0,0,0,0)'">
                     <span style="opacity:0;font-family:'Unbounded',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:#fff;text-transform:uppercase;transition:opacity 0.2s;" class="proj7-hover-label">View Projects →</span>
@@ -1309,8 +1310,8 @@
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.3rem;">Fan Branding · 2024</div>
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.85rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;margin-bottom:0.75rem;">HM20</div>
                     <div style="display:flex;flex-direction:column;gap:0.35rem;">
-                        <img src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:4/3;object-fit:contain;background:#111110;border-radius:4px;" alt="HM20 logo">
-                        <img src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
+                        <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:4/3;object-fit:contain;background:#111110;border-radius:4px;" alt="HM20 logo">
+                        <img loading="lazy" src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
                     </div>
                 </div>
 
@@ -1319,8 +1320,8 @@
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.3rem;">Art Direction · 2024</div>
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.85rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;margin-bottom:0.75rem;">Lorena: A Two-Act Portrait</div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;">
-                        <img src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="La Norteña">
-                        <img src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
+                        <img loading="lazy" src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="La Norteña">
+                        <img loading="lazy" src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
                     </div>
                 </div>
 
@@ -1329,10 +1330,10 @@
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.3rem;">Concept Design · Personal</div>
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.85rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;margin-bottom:0.75rem;">Fan Posters &amp; Concepts</div>
                     <div style="display:flex;flex-direction:column;gap:0.35rem;">
-                        <img src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 30%;border-radius:4px;" alt="Charmed">
-                        <img src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
-                        <img src="fan-truman-show.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;border-radius:4px;" alt="Truman Show">
-                        <img src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
+                        <img loading="lazy" src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 30%;border-radius:4px;" alt="Charmed">
+                        <img loading="lazy" src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
+                        <img loading="lazy" src="fan-truman-show.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;border-radius:4px;" alt="Truman Show">
+                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
                     </div>
                 </div>
 
@@ -1417,24 +1418,24 @@
                     <span class="contact-card-value">angelcesena.studio@gmail.com</span>
                     <span class="contact-card-arrow">↗</span>
                 </a>
-                <a href="https://instagram.com/cesenative" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <a href="https://instagram.com/cesenative" target="_blank" class="contact-card">
                     <span class="contact-card-label">Instagram</span>
                     <span class="contact-card-value">@cesenative</span>
                     <span class="contact-card-arrow">↗</span>
                 </a>
-                <a href="https://linkedin.com/in/angelcesena" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <a href="https://linkedin.com/in/angelcesena" target="_blank" class="contact-card">
                     <span class="contact-card-label">LinkedIn</span>
                     <span class="contact-card-value">Angel Cesena</span>
                     <span class="contact-card-arrow">↗</span>
                 </a>
-                <a href="https://contra.com/angel_cesena_3ro4bph7" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <a href="https://contra.com/angel_cesena_3ro4bph7" target="_blank" class="contact-card">
                     <span class="contact-card-label">Contra</span>
                     <span class="contact-card-value">@angel_cesena</span>
                     <span class="contact-card-arrow">↗</span>
                 </a>
             </div>
         </div>
-        <img src="Owlita_says_hi.svg" alt="Owlita" class="footer-owlita">
+        <img loading="lazy" src="Owlita_says_hi.svg" alt="Owlita" class="footer-owlita">
     </section>
 
     <footer>
@@ -1456,13 +1457,13 @@
             <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:#F9F8F6;text-transform:uppercase;letter-spacing:-0.03em;margin-bottom:3rem;">Personal<br>Work</h2>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;">
                 <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
-                    <img src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:1;object-fit:contain;padding:1rem;display:block;" alt="HM20">
+                    <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:1;object-fit:contain;padding:1rem;display:block;" alt="HM20">
                     <div style="padding:0.85rem 1rem 0.5rem;">
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.2rem;">Fan Branding · 2024</div>
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;">HM20</div>
                     </div>
                     <div style="padding:0 1rem 1rem;">
-                        <img src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
+                        <img loading="lazy" src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
                     </div>
                 </div>
                 <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
@@ -1471,20 +1472,20 @@
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;">Lorena: A Two-Act Portrait</div>
                     </div>
                     <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
-                        <img src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="La Norteña">
-                        <img src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
+                        <img loading="lazy" src="lorena-vinyl-la-nortena1.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="La Norteña">
+                        <img loading="lazy" src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
                     </div>
                 </div>
                 <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
-                    <img src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;" alt="Fan Posters">
+                    <img loading="lazy" src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;" alt="Fan Posters">
                     <div style="padding:0.85rem 1rem 0.5rem;">
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.2rem;">Concept Design · Personal</div>
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;">Fan Posters &amp; Concepts</div>
                     </div>
                     <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
-                        <img src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
-                        <img src="fan-truman-show.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Truman Show">
-                        <img src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
+                        <img loading="lazy" src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
+                        <img loading="lazy" src="fan-truman-show.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Truman Show">
+                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
                     </div>
                 </div>
             </div>
@@ -1512,9 +1513,7 @@
     <div id="proj-drawer" style="
         display:none;
         position:fixed; inset:0; z-index:500;
-        background:rgba(0,0,0,0.6);
-        backdrop-filter:blur(4px);
-        -webkit-backdrop-filter:blur(4px);
+        background:rgba(0,0,0,0.75);
         align-items:flex-end;
         overscroll-behavior: contain;
     ">
@@ -1759,41 +1758,38 @@
     </style>
 
     <script>
-        // ── HERO SYSTEM ──
-        // Refs
+        // ── CESENATIVE scroll animation ──
         const heroContainer  = document.getElementById('heroContainer');
-        const heroGiantName  = document.getElementById('heroGiantName');
         const lineAngel      = document.getElementById('lineAngel');
         const nameRuleEl     = document.getElementById('nameRule');
         const tiveLetters    = document.querySelectorAll('.tive-letter');
         const cesenaTiveLine = document.querySelector('.cesena-tive-line');
         const nav            = document.querySelector('.nav');
 
-        // Utils
         function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
         function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
         function easeIn(t)  { return t * t * t; }
         function lerp(a, b, t) { return a + (b - a) * t; }
+
         const isMobileHero = () => window.innerWidth <= 860;
 
-        // Layout cache — expensive reads happen once, not on every scroll frame
-        let targetScale      = 1;
+        // Cache expensive layout reads — only recalculate on resize, not every scroll frame
+        let targetScale = 1;
         let cachedScrollable = 0;
-        let cachedHeroTop    = 0;
-        let lastWidth        = window.innerWidth;
-        let entryDone        = false; // gates scroll animation until entry finishes
+        let lastWidth = window.innerWidth;
 
         function getTargetScale() {
             if (!cesenaTiveLine) return 1;
             const padding = isMobileHero() ? 40 : 0;
-            return (window.innerWidth - padding) / cesenaTiveLine.scrollWidth;
+            const available = window.innerWidth - padding;
+            const natural = cesenaTiveLine.scrollWidth;
+            return available / natural;
         }
 
         function cacheLayout() {
-            targetScale      = getTargetScale();
+            targetScale = getTargetScale();
+            // Read offsetHeight once here instead of inside the scroll handler
             cachedScrollable = heroContainer.offsetHeight - window.innerHeight;
-            // getBoundingClientRect + scrollY is more reliable than offsetTop
-            cachedHeroTop    = heroContainer.getBoundingClientRect().top + (window.scrollY || window.pageYOffset);
         }
 
         window.addEventListener('resize', () => {
@@ -1804,33 +1800,42 @@
             }
         });
 
-        // ── SCROLL ANIMATION ──
+        // Hide hero text until fonts load to prevent flash of wrong scale
+        if (cesenaTiveLine) cesenaTiveLine.style.visibility = 'hidden';
+
+        document.fonts.ready.then(() => {
+            cacheLayout();
+            if (cesenaTiveLine) cesenaTiveLine.style.visibility = '';
+            onScroll();
+        });
+
         function updateScroll() {
+            // Use cached scrollable — avoids forced layout reflow on every frame
             const scrollTop = window.scrollY || window.pageYOffset;
-            const progress  = clamp((scrollTop - cachedHeroTop) / cachedScrollable, 0, 1);
+            const heroTop = heroContainer.offsetTop;
+            const progress = clamp((scrollTop - heroTop) / cachedScrollable, 0, 1);
 
             nav.classList.toggle('scrolled', progress > 0.6);
 
-            // ANGEL + CESENA only run after entry animation completes
-            if (entryDone) {
-                const ap = clamp((progress - 0.05) / 0.40, 0, 1);
-                const ae = easeIn(ap);
-                lineAngel.style.opacity         = 1 - ae;
-                lineAngel.style.transform       = `scale(${lerp(1, 0.5, ae)}) translateY(${lerp(0, -20, ae)}px)`;
-                lineAngel.style.transformOrigin = 'left center';
-                if (nameRuleEl) nameRuleEl.style.opacity = 1 - ae;
+            // ANGEL fades + shrinks
+            const ap = clamp((progress - 0.05) / 0.40, 0, 1);
+            const ae = easeIn(ap);
+            lineAngel.style.opacity = 1 - ae;
+            lineAngel.style.transform = `scale(${lerp(1, 0.5, ae)}) translateY(${lerp(0, -20, ae)}px)`;
+            lineAngel.style.transformOrigin = 'left center';
+            if (nameRuleEl) nameRuleEl.style.opacity = 1 - ae;
 
-                if (isMobileHero() && cesenaTiveLine) {
-                    const sp    = clamp((progress - 0.05) / 0.80, 0, 1);
-                    const scale = lerp(1, targetScale, easeOut(sp));
-                    cesenaTiveLine.style.transform       = `scale(${scale})`;
-                    cesenaTiveLine.style.transformOrigin = 'left center';
-                } else if (cesenaTiveLine) {
-                    cesenaTiveLine.style.transform = '';
-                }
+            // CESENA scales
+            if (isMobileHero() && cesenaTiveLine) {
+                const sp = clamp((progress - 0.05) / 0.80, 0, 1);
+                const scale = lerp(1, targetScale, easeOut(sp));
+                cesenaTiveLine.style.transform = `scale(${scale})`;
+                cesenaTiveLine.style.transformOrigin = 'left center';
+            } else if (cesenaTiveLine) {
+                cesenaTiveLine.style.transform = '';
             }
 
-            // TIVE letters — scroll-driven, always runs independently of entry
+            // TIVE types in
             tiveLetters.forEach((el, i) => {
                 const ls = 0.30 + i * 0.12;
                 const le = ls + 0.18;
@@ -1844,7 +1849,10 @@
         let ticking = false;
         function onScroll() {
             if (!ticking) {
-                requestAnimationFrame(() => { updateScroll(); ticking = false; });
+                requestAnimationFrame(() => {
+                    updateScroll();
+                    ticking = false;
+                });
                 ticking = true;
             }
         }
@@ -1855,60 +1863,6 @@
             a.addEventListener('click', e => {
                 const t = document.querySelector(a.getAttribute('href'));
                 if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
-        });
-
-        // ── ENTRY ANIMATION ──
-        // Hide the entire name block until fonts load AND initial positions are set.
-        // This prevents both the "wrong scale flash" AND the old bug where cesenaTiveLine
-        // was hidden separately — causing CESENA to animate invisibly and snap into place.
-        if (heroGiantName) heroGiantName.style.opacity = '0';
-
-        document.fonts.ready.then(() => {
-            cacheLayout();
-
-            const letters = document.querySelectorAll('.hero-letter');
-            const edges   = ['top', 'bottom', 'left', 'right'];
-            const vw = window.innerWidth, vh = window.innerHeight;
-
-            const getOffset = edge => {
-                const dx = vw * 0.8, dy = vh * 0.7;
-                if (edge === 'top')    return `translateY(-${dy}px)`;
-                if (edge === 'bottom') return `translateY(${dy}px)`;
-                if (edge === 'left')   return `translateX(-${dx}px)`;
-                return `translateX(${dx}px)`;
-            };
-
-            // Snap letters to their starting offscreen positions — no transition yet
-            letters.forEach(el => {
-                el.style.transition = 'none';
-                el.style.transform  = getOffset(edges[Math.floor(Math.random() * edges.length)]);
-                el.style.opacity    = '0';
-            });
-
-            // Reveal the name block — letters are offscreen so nothing visible yet
-            heroGiantName.style.transition = 'opacity 0.1s ease';
-            heroGiantName.style.opacity    = '1';
-
-            // Double rAF ensures the browser paints the initial offset state
-            // before we add transitions — guarantees a visible animation from the right position
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    letters.forEach((el, i) => {
-                        setTimeout(() => {
-                            el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
-                            el.style.transform  = 'translate(0, 0)';
-                            el.style.opacity    = '1';
-                        }, i * 60);
-                    });
-
-                    // After the last letter finishes landing, unlock the scroll animation
-                    const totalMs = (letters.length - 1) * 60 + 820;
-                    setTimeout(() => {
-                        entryDone = true;
-                        onScroll(); // sync to whatever scroll position we're at now
-                    }, totalMs);
-                });
             });
         });
 
@@ -1955,7 +1909,7 @@
                     </div>
                 `;
             } else {
-                card.innerHTML = `<img class="mobile-proj-card-img" src="${img}" alt="${title}">`;
+                card.innerHTML = `<img class="mobile-proj-card-img" loading="lazy" src="${img}" alt="${title}">`;
             }
 
             // Append consistent text container for all cards
@@ -2025,22 +1979,57 @@
             if (e.target === this) closeDrawer();
         });
 
-        /* ── DESKTOP PROJECT CARDS & MODAL ── */
-        // Properly scoped — no longer trapped inside the letter animation IIFE
+        // Initial Hero Animation
+        (function() {
+            const letters = document.querySelectorAll('.hero-letter');
+            const edges = ['top','bottom','left','right'];
+
+            const getOffset = (edge) => {
+                const vw = window.innerWidth;
+                const vh = window.innerHeight;
+                const dx = vw * 0.8;
+                const dy = vh * 0.7;
+                if (edge === 'top')    return `translateY(-${dy}px)`;
+                if (edge === 'bottom') return `translateY(${dy}px)`;
+                if (edge === 'left')   return `translateX(-${dx}px)`;
+                if (edge === 'right')  return `translateX(${dx}px)`;
+            };
+
+            letters.forEach(el => {
+                const edge = edges[Math.floor(Math.random() * edges.length)];
+                el.style.transform = getOffset(edge);
+                el.style.transition = 'none';
+            });
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    letters.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
+                            el.classList.add('landed');
+                            el.style.opacity = '1';
+                            el.style.transform = 'translate(0,0)';
+                        }, i * 60);
+                    });
+                });
+            });
+        // ── DESKTOP PROJECT CARDS & MODAL ──
         function isDesktop() { return window.innerWidth > 860; }
 
+        // Build desktop thumbnail cards for projects 01-06
         if (isDesktop()) {
             document.querySelectorAll('.project[data-proj-num]').forEach(article => {
                 const num   = article.dataset.projNum;
                 const img   = article.dataset.projImg;
                 const title = article.dataset.projTitle;
                 const cat   = article.dataset.projCat;
-                if (num === '06') return;
+                if (num === '06') return; // proj6 (Personal Work) has its own card
 
                 const card = document.createElement('div');
                 card.className = 'desktop-proj-card';
 
                 if (num === '07') {
+                    // Globología — gradient card, no image
                     card.innerHTML = `
                         <div style="width:100%;aspect-ratio:16/9;background:#111110;position:relative;overflow:hidden;">
                             <div style="position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,hsla(0,80%,55%,0.55),hsla(45,80%,55%,0.55),hsla(90,80%,55%,0.55),hsla(135,80%,55%,0.55),hsla(180,80%,55%,0.55),hsla(225,80%,55%,0.55),hsla(270,80%,55%,0.55),hsla(315,80%,55%,0.55),hsla(360,80%,55%,0.55));"></div>
@@ -2057,7 +2046,7 @@
                     `;
                 } else {
                     card.innerHTML = `
-                        <img src="${img}" alt="${title}">
+                        <img loading="lazy" src="${img}" alt="${title}">
                         <div class="desktop-proj-card-info">
                             <div class="desktop-proj-card-num">${num}</div>
                             <div class="desktop-proj-card-title">${title}</div>
@@ -2071,11 +2060,13 @@
             });
         }
 
+        // Open shared modal with project content
         function openProjModal(article, num, title) {
             if (!isDesktop()) return;
             const modal = document.getElementById('proj-modal');
             const inner = document.getElementById('proj-modal-inner');
 
+            // Clone article content excluding desktop card and mobile card
             inner.innerHTML = '';
             const header = document.createElement('div');
             header.style.cssText = 'margin-bottom:2.5rem;';
@@ -2085,16 +2076,20 @@
             `;
             inner.appendChild(header);
 
-            ['project-header', 'project-image', 'project-body'].forEach(cls => {
+            // Clone project-header, project-image, project-body
+            ['project-header','project-image','project-body'].forEach(cls => {
                 const el = article.querySelector('.' + cls);
                 if (el) {
                     const clone = el.cloneNode(true);
                     clone.style.display = '';
-                    clone.querySelectorAll('[style]').forEach(child => child.style.removeProperty('display'));
+                    clone.querySelectorAll('[style]').forEach(child => {
+                        child.style.removeProperty('display');
+                    });
                     inner.appendChild(clone);
                 }
             });
 
+            // Also clone book-mockup if present
             const mockup = article.querySelector('.book-mockup');
             if (mockup) {
                 const clone = mockup.cloneNode(true);
@@ -2112,6 +2107,7 @@
             document.body.style.overflow = '';
         }
 
+        // Proj7 modal
         function openProj7Modal() {
             if (!isDesktop()) return;
             document.getElementById('proj7-modal').style.display = 'block';
@@ -2122,6 +2118,7 @@
             document.body.style.overflow = '';
         }
 
+        // Close modals on backdrop click
         document.getElementById('proj-modal').addEventListener('click', function(e) {
             if (e.target === this) closeProjModal();
         });
@@ -2132,12 +2129,15 @@
             if (e.key === 'Escape') { closeProjModal(); closeProj7Modal(); }
         });
 
+        // Proj7 hover label
         const p7card = document.querySelector('.proj7-desktop-card');
         if (p7card) {
             const label = p7card.querySelector('.proj7-hover-label');
             p7card.addEventListener('mouseenter', () => { if (label) label.style.opacity = '1'; });
             p7card.addEventListener('mouseleave', () => { if (label) label.style.opacity = '0'; });
         }
+
+        })(); // end IIFE
     </script>
 </body>
 </html>
