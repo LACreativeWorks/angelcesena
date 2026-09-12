@@ -18,13 +18,15 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --black: #111110;
-            --white: #F9F8F6;
-            --gray: #787672;
-            --rule: #252422;
-            --accent: #C8B89A;
-            --bg: #111110;
-            --text: #F9F8F6;
+            --black: #100D0B;
+            --cream: #F1E3C7;
+            --white: #F1E3C7;
+            --gray: #A39486;
+            --rule: #3A211B;
+            --red: #C9362B;
+            --accent: #C9362B;
+            --bg: #100D0B;
+            --text: #F1E3C7;
         }
 
         html { scroll-behavior: smooth; }
@@ -262,7 +264,7 @@
         /* ─── WORK ─── */
         .work {
             padding: 3.5rem 2.5rem 4rem;
-            background: #1a1916;
+            background: #17100D;
             position: relative;
             z-index: 20;
             border-radius: 24px 24px 0 0;
@@ -274,7 +276,7 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            border-bottom: 1px solid #252422;
+            border-bottom: 1px solid var(--rule);
             padding-bottom: 1rem;
             margin-bottom: 5rem;
         }
@@ -363,7 +365,7 @@
             display: flex;
             gap: 3rem;
             padding-top: 1.25rem;
-            border-top: 1px solid #252422;
+            border-top: 1px solid var(--rule);
             flex-wrap: wrap;
         }
 
@@ -373,7 +375,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             letter-spacing: 0.04em;
-            color: var(--bronze, #8B6F47);
+            color: var(--accent);
             text-decoration: none;
             border-bottom: 1px solid currentColor;
             padding-bottom: 2px;
@@ -446,7 +448,7 @@
         /* ─── BOOK MOCKUP ─── */
         .book-mockup {
             position: relative;
-            background: #1a1a18;
+            background: #17100D;
             aspect-ratio: 16/9;
             overflow: hidden;
             display: flex;
@@ -587,7 +589,7 @@
         /* ─── DIVIDER ─── */
         .section-break {
             border: none;
-            border-top: 1px solid #252422;
+            border-top: 1px solid var(--rule);
             margin: 0 0 5rem;
         }
 
@@ -607,7 +609,7 @@
         }
 
 
-        .about { background: #1a1916; padding: 5rem 2.5rem; position: relative; z-index: 10; }
+        .about { background: #17100D; padding: 5rem 2.5rem; position: relative; z-index: 10; }
 
         .about-grid {
             display: grid;
@@ -1084,7 +1086,57 @@
             .hero-giant-name .name-line,
             .cesena-tive-line .tive-letter { font-size: clamp(2rem, 13.2vw, 3.4rem) !important; }
         }
-    </style>
+    
+        /* ─── CESENATIV BRAND PALETTE ─── */
+        .hero-name-rule {
+            background: var(--red);
+            height: 3px;
+        }
+
+        .hero-top-bar span:first-child,
+        .work-label,
+        .about-cap-label {
+            color: var(--red);
+        }
+
+        .work {
+            background: #17100D;
+            box-shadow: 0 -32px 80px rgba(16,13,11,0.72);
+        }
+
+        .project-header,
+        .project-details {
+            border-color: rgba(241,227,199,0.14);
+        }
+
+        .project-num {
+            color: var(--red);
+        }
+
+        .project-link {
+            color: var(--red);
+        }
+
+        .contact-big {
+            -webkit-text-stroke-color: var(--black);
+        }
+
+        ::selection {
+            background: var(--red);
+            color: var(--cream);
+        }
+
+        @media (hover: hover) {
+            .project-title,
+            .work-label,
+            .nav-name {
+                transition: color .25s ease;
+            }
+            .project:hover .project-title {
+                color: var(--red);
+            }
+        }
+</style>
 </head>
 <body>
 
@@ -1359,7 +1411,7 @@
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.3rem;">Fan Branding · 2024</div>
                     <div style="font-family:'Unbounded',sans-serif;font-size:0.85rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;margin-bottom:0.75rem;">HM20</div>
                     <div style="display:flex;flex-direction:column;gap:0.35rem;">
-                        <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:4/3;object-fit:contain;background:#111110;border-radius:4px;" alt="HM20 logo">
+                        <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:4/3;object-fit:contain;background:#100D0B;border-radius:4px;" alt="HM20 logo">
                         <img loading="lazy" src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
                     </div>
                 </div>
@@ -1382,7 +1434,7 @@
                         <img loading="lazy" src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 30%;border-radius:4px;" alt="Charmed">
                         <img loading="lazy" src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
                         <img loading="lazy" src="fan-truman-show.jpg" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;border-radius:4px;" alt="Truman Show">
-                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
+                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#100D0B;border-radius:4px;" alt="Vanessa of Wrath">
                     </div>
                 </div>
 
@@ -1395,7 +1447,7 @@
                 <span class="project-num">07</span>
                 <span class="project-cat">Product Development · Publishing · Go-to-Market · 2023–Present</span>
             </div>
-            <div class="proj02-banner" style="display:block; overflow:hidden; margin-bottom:1.5rem; border-radius:6px; aspect-ratio:16/7; position:relative; background:#111110;">
+            <div class="proj02-banner" style="display:block; overflow:hidden; margin-bottom:1.5rem; border-radius:6px; aspect-ratio:16/7; position:relative; background:#100D0B;">
                 <div style="
                     position:absolute;inset:0;
                     background: conic-gradient(
@@ -1505,7 +1557,7 @@
             <div style="font-family:'Unbounded',sans-serif;font-size:0.45rem;letter-spacing:0.2em;color:rgba(249,248,246,0.3);text-transform:uppercase;margin-bottom:0.5rem;">06</div>
             <h2 style="font-family:'Unbounded',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;color:#F9F8F6;text-transform:uppercase;letter-spacing:-0.03em;margin-bottom:3rem;">Personal<br>Work</h2>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;">
-                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
+                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#17100D;">
                     <img loading="lazy" src="hm-20-logo-bg-removed.png" style="width:100%;aspect-ratio:1;object-fit:contain;padding:1rem;display:block;" alt="HM20">
                     <div style="padding:0.85rem 1rem 0.5rem;">
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.2rem;">Fan Branding · 2024</div>
@@ -1515,7 +1567,7 @@
                         <img loading="lazy" src="hm_20_4.jpg" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;" alt="HM20 poster">
                     </div>
                 </div>
-                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
+                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#17100D;">
                     <div style="padding:0.85rem 1rem 0.5rem;">
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.2rem;">Art Direction · 2024</div>
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.78rem;font-weight:700;color:#F9F8F6;text-transform:uppercase;">Lorena: A Two-Act Portrait</div>
@@ -1525,7 +1577,7 @@
                         <img loading="lazy" src="lorena-vinyl-nina-traviesa.jpg" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;" alt="Niña Traviesa">
                     </div>
                 </div>
-                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#1a1916;">
+                <div style="border-radius:8px;overflow:hidden;border:1px solid rgba(249,248,246,0.08);background:#17100D;">
                     <img loading="lazy" src="fan-charmed-trio.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 30%;display:block;" alt="Fan Posters">
                     <div style="padding:0.85rem 1rem 0.5rem;">
                         <div style="font-family:'Unbounded',sans-serif;font-size:0.42rem;letter-spacing:0.2em;color:rgba(249,248,246,0.35);text-transform:uppercase;margin-bottom:0.2rem;">Concept Design · Personal</div>
@@ -1534,7 +1586,7 @@
                     <div style="padding:0 1rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
                         <img loading="lazy" src="fan-vanessa-angel-scream-poster.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-radius:4px;" alt="Vanessa & Angel Scream">
                         <img loading="lazy" src="fan-truman-show.jpg" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;" alt="Truman Show">
-                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#111110;border-radius:4px;" alt="Vanessa of Wrath">
+                        <img loading="lazy" src="fan-vanessa-wrath.png" style="width:100%;aspect-ratio:3/4;object-fit:contain;background:#100D0B;border-radius:4px;" alt="Vanessa of Wrath">
                     </div>
                 </div>
             </div>
@@ -1567,7 +1619,7 @@
         overscroll-behavior: contain;
     ">
         <div id="proj-drawer-panel" style="
-            background:#1a1916;
+            background:#17100D;
             width:100%;
             max-height:90vh;
             border-radius:16px 16px 0 0;
@@ -1576,7 +1628,7 @@
             transition:transform 0.4s cubic-bezier(0.32,0.72,0,1);
             -webkit-overflow-scrolling:touch;
         ">
-            <div style="position:sticky;top:0;background:#1a1916;padding:1rem 1.25rem 0.5rem;display:flex;justify-content:space-between;align-items:center;z-index:2;border-bottom:1px solid #2a2926;">
+            <div style="position:sticky;top:0;background:#17100D;padding:1rem 1.25rem 0.5rem;display:flex;justify-content:space-between;align-items:center;z-index:2;border-bottom:1px solid #2a2926;">
                 <span id="drawer-num" style="font-family:'Unbounded',sans-serif;font-size:0.5rem;letter-spacing:0.2em;color:var(--gray);font-weight:300;"></span>
                 <button onclick="closeDrawer()" style="background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--gray);line-height:1;padding:0.25rem;">×</button>
             </div>
@@ -1609,7 +1661,7 @@
                 position: relative;
                 border-radius: 8px;
                 overflow: hidden;
-                background: #1a1916;
+                background: #17100D;
             }
             .desktop-proj-card img {
                 width: 100%;
@@ -1751,7 +1803,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #252422;
+            border-top: 1px solid var(--rule);
         }
 
         .mobile-proj-card-info.dark {
@@ -2080,7 +2132,7 @@
                 if (num === '07') {
                     // Globología — gradient card, no image
                     card.innerHTML = `
-                        <div style="width:100%;aspect-ratio:16/9;background:#111110;position:relative;overflow:hidden;">
+                        <div style="width:100%;aspect-ratio:16/9;background:#100D0B;position:relative;overflow:hidden;">
                             <div style="position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,hsla(0,80%,55%,0.55),hsla(45,80%,55%,0.55),hsla(90,80%,55%,0.55),hsla(135,80%,55%,0.55),hsla(180,80%,55%,0.55),hsla(225,80%,55%,0.55),hsla(270,80%,55%,0.55),hsla(315,80%,55%,0.55),hsla(360,80%,55%,0.55));"></div>
                             <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;">
                                 <span style="font-family:'Unbounded',sans-serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(249,248,246,0.95);">In Production</span>
