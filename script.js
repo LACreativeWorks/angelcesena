@@ -13,6 +13,13 @@ setTimeout(makeFlight,2350);
 addEventListener('scroll',updateHandoff,{passive:true});
 addEventListener('resize',()=>{if(flight){flight.remove();flight=null;heroWord.classList.remove('is-handed-off');navBrand.classList.remove('is-visible');makeFlight()}});
 
+const heroColors=['#17543f','#f3ead9','#101010','#112f52','#7b1640','#6c2bd9'];
+let heroColor=0;
+hero.addEventListener('pointerenter',()=>hero.classList.add('is-exploring'));
+hero.addEventListener('pointerleave',()=>hero.classList.remove('is-exploring'));
+hero.addEventListener('pointermove',e=>{const rect=hero.getBoundingClientRect();hero.style.setProperty('--mouse-x',`${e.clientX-rect.left}px`);hero.style.setProperty('--mouse-y',`${e.clientY-rect.top}px`)});
+hero.addEventListener('click',()=>{heroColor=(heroColor+1)%heroColors.length;document.querySelector('.hero-color-reveal').style.backgroundColor=heroColors[heroColor]});
+
 const copy=document.querySelector('.reveal-copy');
 const chars=[...copy.querySelectorAll('.char')];
 const updateReveal=()=>{const rect=copy.getBoundingClientRect();const start=innerHeight*.78;const end=innerHeight*.17;const progress=Math.max(0,Math.min(1,(start-rect.top)/(start-end+rect.height*.56)));const active=Math.round(progress*chars.length);chars.forEach((char,i)=>char.classList.toggle('on',i<active));};
