@@ -1856,6 +1856,297 @@
         #proj-drawer-panel.is-dark { background: #111110; }
         #proj-drawer-panel.is-dark #drawer-num { color: rgba(249,248,246,0.3); }
         #proj-drawer-panel.is-dark > div:first-child { background: #111110; border-bottom-color: rgba(255,255,255,0.08); }
+
+        /* ─── MOBILE-PRIORITY OVERRIDES ─── */
+        @media (max-width: 860px) {
+            html {
+                background: var(--black);
+                scroll-padding-top: 4rem;
+            }
+
+            body {
+                min-width: 320px;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .nav {
+                gap: .75rem;
+                padding:
+                    max(.85rem, env(safe-area-inset-top))
+                    max(1rem, env(safe-area-inset-right))
+                    .8rem
+                    max(1rem, env(safe-area-inset-left));
+                transition: background-color .25s ease, backdrop-filter .25s ease;
+            }
+
+            .nav.scrolled {
+                background: rgba(16, 13, 11, .88);
+                -webkit-backdrop-filter: blur(14px);
+                backdrop-filter: blur(14px);
+            }
+
+            .nav-name {
+                flex: 0 0 auto;
+                font-size: .52rem;
+                letter-spacing: .14em;
+            }
+
+            .nav-links {
+                min-width: 0;
+                gap: clamp(.65rem, 3vw, 1.15rem);
+            }
+
+            .nav-links a {
+                font-size: .52rem;
+                letter-spacing: .1em;
+            }
+
+            #heroContainer {
+                height: 150svh !important;
+                min-height: 150svh;
+            }
+
+            .hero {
+                height: 100svh;
+                min-height: 100svh;
+                padding:
+                    max(4.5rem, calc(env(safe-area-inset-top) + 3.5rem))
+                    max(1rem, env(safe-area-inset-right))
+                    max(1.25rem, env(safe-area-inset-bottom))
+                    max(1rem, env(safe-area-inset-left));
+                overflow: clip;
+                contain: layout paint;
+            }
+
+            .hero-top-bar {
+                flex-wrap: nowrap;
+                font-size: .43rem;
+                letter-spacing: .15em;
+            }
+
+            .hero-giant-name {
+                width: 100%;
+                overflow: clip;
+            }
+
+            .hero-giant-name .name-line,
+            .cesena-tive-line .tive-letter {
+                font-size: clamp(2rem, 13.25vw, 6.8rem) !important;
+                line-height: .9;
+            }
+
+            .hero-name-rule {
+                height: 2px;
+            }
+
+            .cesena-tive-line {
+                width: max-content;
+                transform-origin: left center;
+            }
+
+            .hero-count {
+                font-size: .46rem;
+                line-height: 1.45;
+            }
+
+            .work {
+                margin-top: 0 !important;
+                padding: 2rem 1rem max(1rem, env(safe-area-inset-bottom));
+                border-radius: 18px 18px 0 0;
+                box-shadow: 0 -12px 36px rgba(16, 13, 11, .34);
+            }
+
+            .work-header {
+                align-items: center;
+                margin-bottom: 1.25rem;
+                padding-bottom: .8rem;
+            }
+
+            .work-label {
+                font-size: .7rem;
+            }
+
+            .work-count {
+                font-size: .58rem;
+            }
+
+            .project {
+                margin: 0;
+            }
+
+            .mobile-proj-card {
+                width: 100%;
+                margin-bottom: .85rem;
+                border: 1px solid rgba(241, 227, 199, .1);
+                border-radius: 8px;
+                box-shadow: none;
+                touch-action: manipulation;
+            }
+
+            .mobile-proj-card:active {
+                transform: scale(.992);
+            }
+
+            .mobile-proj-card-img {
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .mobile-proj-card-info,
+            .mobile-proj-card-info.dark {
+                min-height: 88px;
+                padding: .9rem 1rem;
+                background: var(--black);
+            }
+
+            .mobile-proj-card-num {
+                color: var(--red);
+            }
+
+            .mobile-proj-card-title {
+                color: var(--cream);
+                font-size: clamp(.78rem, 3.7vw, .95rem);
+                overflow-wrap: anywhere;
+            }
+
+            .mobile-proj-card-cat {
+                color: rgba(241, 227, 199, .56);
+                font-size: .56rem;
+                line-height: 1.35;
+            }
+
+            .mobile-proj-card-arrow {
+                color: var(--red);
+            }
+
+            #proj-drawer {
+                height: 100dvh;
+                padding-top: env(safe-area-inset-top);
+            }
+
+            #proj-drawer-panel,
+            #proj-drawer-panel.is-dark {
+                max-height: 92dvh;
+                background: #17100D;
+                overscroll-behavior: contain;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            #proj-drawer-panel > div:first-child,
+            #proj-drawer-panel.is-dark > div:first-child {
+                min-height: 52px;
+                padding: .65rem 1rem;
+                background: rgba(23, 16, 13, .96);
+                border-bottom-color: rgba(241, 227, 199, .12);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+            }
+
+            #proj-drawer-panel button {
+                min-width: 44px;
+                min-height: 44px;
+                color: var(--cream) !important;
+            }
+
+            #drawer-content {
+                padding: 1rem !important;
+                overflow-x: hidden;
+            }
+
+            #drawer-content .project-header {
+                display: flex !important;
+                align-items: flex-start;
+                gap: .4rem;
+            }
+
+            #drawer-content .project-body,
+            #drawer-content .project-full .project-body,
+            #drawer-content .project-two .project-body {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.25rem !important;
+                width: 100%;
+            }
+
+            #drawer-content [style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            #drawer-content img,
+            #drawer-content video {
+                display: block;
+                width: 100% !important;
+                max-width: 100%;
+                height: auto !important;
+                object-fit: contain;
+            }
+
+            #drawer-content .project-title {
+                font-size: clamp(1.25rem, 7vw, 2rem);
+                overflow-wrap: anywhere;
+            }
+
+            #drawer-content .project-details {
+                gap: 1rem 1.5rem;
+            }
+
+            .about {
+                padding: 3.25rem 1rem;
+            }
+
+            .about-grid {
+                gap: 2rem;
+            }
+
+            .contact {
+                min-height: auto;
+                padding: 0;
+            }
+
+            .contact-inner {
+                padding:
+                    5rem
+                    max(1rem, env(safe-area-inset-right))
+                    max(4rem, env(safe-area-inset-bottom))
+                    max(1rem, env(safe-area-inset-left));
+            }
+
+            .contact-big {
+                margin-bottom: 2.5rem;
+                font-size: clamp(2.7rem, 14vw, 6rem);
+                -webkit-text-stroke-width: 1px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .nav-links li:nth-child(2) {
+                display: none;
+            }
+
+            .hero-giant-name .name-line,
+            .cesena-tive-line .tive-letter {
+                font-size: clamp(1.9rem, 13vw, 3.2rem) !important;
+            }
+
+            .work {
+                padding-inline: .8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
     </style>
 
     <script>
@@ -1998,6 +2289,9 @@
 
             const card = document.createElement('div');
             card.className = 'mobile-proj-card';
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', `Open ${title} project`);
 
             // Exception: Globología gets the gradient
             if (num === "07") {
@@ -2026,8 +2320,16 @@
             `;
 
             card.addEventListener('click', () => openDrawer(article, dark));
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openDrawer(article, dark);
+                }
+            });
             article.insertBefore(card, article.firstChild);
         });
+
+        let drawerScrollY = 0;
 
         function openDrawer(article, dark) {
             if (!isMobile()) return;
@@ -2054,9 +2356,15 @@
             num.textContent = article.dataset.projNum;
             panel.classList.toggle('is-dark', dark);
             drawer.style.display = 'flex';
-            
-            // NOTE: document.body.style.overflow = 'hidden' is intentionally omitted here 
-            // to prevent the background page from jumping to the top in iOS/Safari.
+
+            // Lock the page in place while the mobile drawer is open.
+            drawerScrollY = window.scrollY || window.pageYOffset;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${drawerScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.width = '100%';
+            document.body.style.overflow = 'hidden';
 
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
@@ -2073,6 +2381,13 @@
             setTimeout(() => {
                 drawer.style.display = 'none';
                 document.getElementById('drawer-content').innerHTML = '';
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, drawerScrollY);
             }, 400);
         }
 
