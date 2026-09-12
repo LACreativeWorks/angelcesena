@@ -7,7 +7,7 @@ const hero=document.querySelector('.hero');
 const heroWord=document.querySelector('.hero-word');
 const navBrand=document.querySelector('.nav-brand');
 let flight;
-const makeFlight=()=>{if(flight)return;const rect=heroWord.getBoundingClientRect();flight=document.createElement('div');flight.className='hero-flight';flight.textContent='CESENATIV';flight.style.left=`${rect.left}px`;flight.style.top=`${rect.top}px`;flight.dataset.left=rect.left;flight.dataset.top=rect.top;flight.dataset.width=rect.width;document.body.appendChild(flight);heroWord.classList.add('is-handed-off');updateHandoff()};
+const makeFlight=()=>{if(flight)return;const rect=heroWord.getBoundingClientRect();flight=document.createElement('div');flight.className='hero-flight';flight.innerHTML='<img src="cesenativ.svg" alt="">';flight.style.left=`${rect.left}px`;flight.style.top=`${rect.top}px`;flight.dataset.left=rect.left;flight.dataset.top=rect.top;flight.dataset.width=rect.width;document.body.appendChild(flight);heroWord.classList.add('is-handed-off');updateHandoff()};
 const updateHandoff=()=>{if(!flight)return;const p=Math.max(0,Math.min(1,scrollY/(hero.offsetHeight*.82)));const eased=1-Math.pow(1-p,3);const fromLeft=+flight.dataset.left,fromTop=+flight.dataset.top,fromWidth=+flight.dataset.width;const target=navBrand.getBoundingClientRect();const scale=(target.width/fromWidth);const x=(target.left-fromLeft)*eased;const y=(target.top-fromTop)*eased;flight.style.transform=`translate3d(${x}px,${y}px,0) scale(${1+(scale-1)*eased})`;flight.style.opacity=p>=.985?0:1;navBrand.classList.toggle('is-visible',p>=.96)};
 setTimeout(makeFlight,2350);
 addEventListener('scroll',updateHandoff,{passive:true});
