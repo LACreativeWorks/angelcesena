@@ -8,6 +8,12 @@ const chars=[...copy.querySelectorAll('.char')];
 const updateReveal=()=>{const rect=copy.getBoundingClientRect();const start=innerHeight*.78;const end=innerHeight*.17;const progress=Math.max(0,Math.min(1,(start-rect.top)/(start-end+rect.height*.56)));const active=Math.round(progress*chars.length);chars.forEach((char,i)=>char.classList.toggle('on',i<active));};
 addEventListener('scroll',updateReveal,{passive:true});updateReveal();
 
+const visualSection=document.querySelector('.visual-intro');
+const visualFrame=document.querySelector('.visual-frame');
+const visualImage=visualFrame.querySelector('img');
+const updateVisual=()=>{const rect=visualSection.getBoundingClientRect();const progress=Math.max(0,Math.min(1,-rect.top/(visualSection.offsetHeight-innerHeight)));const start=innerWidth<721?.82:.72;visualFrame.style.transform=`scale(${start+(1-start)*progress})`;visualImage.style.transform=`scale(${1.12-progress*.12})`};
+addEventListener('scroll',updateVisual,{passive:true});updateVisual();
+
 const preview=document.querySelector('.project-preview');
 const previewImage=preview.querySelector('img');
 let tx=innerWidth/2,ty=innerHeight/2,cx=tx,cy=ty;
