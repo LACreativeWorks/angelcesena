@@ -25,16 +25,10 @@ const chars=[...copy.querySelectorAll('.char')];
 const updateReveal=()=>{const rect=copy.getBoundingClientRect();const start=innerHeight*.78;const end=innerHeight*.17;const progress=Math.max(0,Math.min(1,(start-rect.top)/(start-end+rect.height*.56)));const active=Math.round(progress*chars.length);chars.forEach((char,i)=>char.classList.toggle('on',i<active));};
 addEventListener('scroll',updateReveal,{passive:true});updateReveal();
 
-const visualSection=document.querySelector('.visual-intro');
-const visualFrame=document.querySelector('.visual-frame');
-const visualImage=visualFrame.querySelector('img');
-const updateVisual=()=>{const rect=visualSection.getBoundingClientRect();const raw=Math.max(0,Math.min(1,-rect.top/(visualSection.offsetHeight-innerHeight)));const progress=raw*raw*(3-2*raw);const start=innerWidth<721?.94:.9;visualFrame.style.transform=`scale(${start+(1-start)*progress})`;visualImage.style.transform=`scale(${1.04-progress*.04})`};
-addEventListener('scroll',updateVisual,{passive:true});updateVisual();
-
 const preview=document.querySelector('.project-preview');
-const previewImage=preview.querySelector('img');
+const previewImages=[...preview.querySelectorAll('img')];
 document.querySelectorAll('.project').forEach(project=>{
-  project.addEventListener('mouseenter',()=>{previewImage.src=project.dataset.image;preview.classList.add('show')});
+  project.addEventListener('mouseenter',()=>{project.dataset.images.split('|').forEach((src,i)=>previewImages[i].src=src);preview.classList.add('show')});
   project.addEventListener('mouseleave',()=>preview.classList.remove('show'));
   project.addEventListener('click',e=>e.preventDefault());
 });
