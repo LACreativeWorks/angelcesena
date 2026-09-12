@@ -28,16 +28,13 @@ addEventListener('scroll',updateReveal,{passive:true});updateReveal();
 const visualSection=document.querySelector('.visual-intro');
 const visualFrame=document.querySelector('.visual-frame');
 const visualImage=visualFrame.querySelector('img');
-const updateVisual=()=>{const rect=visualSection.getBoundingClientRect();const progress=Math.max(0,Math.min(1,-rect.top/(visualSection.offsetHeight-innerHeight)));const start=innerWidth<721?.82:.72;visualFrame.style.transform=`scale(${start+(1-start)*progress})`;visualImage.style.transform=`scale(${1.12-progress*.12})`};
+const updateVisual=()=>{const rect=visualSection.getBoundingClientRect();const raw=Math.max(0,Math.min(1,-rect.top/(visualSection.offsetHeight-innerHeight)));const progress=raw*raw*(3-2*raw);const start=innerWidth<721?.94:.9;visualFrame.style.transform=`scale(${start+(1-start)*progress})`;visualImage.style.transform=`scale(${1.04-progress*.04})`};
 addEventListener('scroll',updateVisual,{passive:true});updateVisual();
 
 const preview=document.querySelector('.project-preview');
 const previewImage=preview.querySelector('img');
-let tx=innerWidth/2,ty=innerHeight/2,cx=tx,cy=ty;
-const follow=()=>{cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;preview.style.left=`${cx}px`;preview.style.top=`${cy}px`;requestAnimationFrame(follow)};follow();
 document.querySelectorAll('.project').forEach(project=>{
   project.addEventListener('mouseenter',()=>{previewImage.src=project.dataset.image;preview.classList.add('show')});
-  project.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
   project.addEventListener('mouseleave',()=>preview.classList.remove('show'));
   project.addEventListener('click',e=>e.preventDefault());
 });
