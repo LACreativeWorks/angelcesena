@@ -35,11 +35,45 @@
       .work-head{padding-top:54px}
       .work-break{display:flex;min-height:34svh;background:var(--ink);color:var(--cream);padding:38px 18px;flex-direction:column;justify-content:center;align-items:flex-end;gap:4px;font-size:11px;letter-spacing:.32em}
       .hello{min-height:70svh;padding:62px 18px 18px}.hello h2{font-size:clamp(76px,24vw,112px);line-height:.78}.hello-links{margin-top:44px;gap:22px}.hello-foot{padding-top:34px;align-items:flex-start;flex-direction:column;gap:16px}}
+    @media(max-width:760px){
+      html{scroll-padding-top:52px}
+      body{overflow-x:hidden}
+      .nav{position:fixed;top:0;left:0;right:0;height:52px;padding:0 18px;z-index:60;background:rgba(248,245,238,.97);border-bottom:1px solid rgba(13,13,12,.16)}
+      .brand{font-size:12px}.navlinks{font-size:10px}
+      .film{height:100svh;padding-top:52px;background:#d92d22;position:relative;display:flex;align-items:center;justify-content:center}
+      .film img{position:static;width:58vw;max-width:280px;height:auto;object-fit:contain;transform:none;filter:none;mix-blend-mode:normal}
+      .manifesto{min-height:82svh;padding:84px 18px 64px;position:relative;display:flex;align-items:center}
+      .manifesto:before{content:'01';position:absolute;top:30px;left:18px;font-size:9px;letter-spacing:.14em}
+      .manifesto:after{content:'INTRO';position:absolute;top:30px;right:18px;font-size:9px;letter-spacing:.14em}
+      .manifesto-inner{position:static!important;min-height:0;height:auto;padding:0!important;display:block}
+      .manifesto p{font-size:clamp(43px,11vw,58px);line-height:.98;letter-spacing:-.055em}
+      .manifesto .char{opacity:1!important;color:var(--ink)!important}
+      .work-head{padding:42px 18px 26px;gap:18px;align-items:flex-start;flex-direction:column;border-top:1px solid var(--line)}
+      .work-head h1{font-size:clamp(54px,15vw,74px);line-height:.83}
+      .work-head p{font-size:11px;line-height:1.45;max-width:260px}
+      .work-row summary{grid-template-columns:22px 1fr 24px;gap:9px;padding:23px 18px}
+      .num{font-size:9px}.row-title{font-size:clamp(38px,10.8vw,52px);line-height:.9;letter-spacing:-.055em}
+      .plus{font-size:25px}
+      .drop,.invite-drop{grid-template-columns:1fr;gap:18px;padding:0 18px 26px}
+      .drop-media{aspect-ratio:4/5}.drop-copy p{font-size:13px}.visit{margin-top:18px}
+      .invite-stack{gap:8px}
+      .work-break{display:flex;position:relative;min-height:34svh;background:var(--ink);color:var(--cream);padding:34px 18px;flex-direction:column;justify-content:center;align-items:flex-end;gap:5px;font-size:10px;letter-spacing:.34em;overflow:hidden}
+      .work-break:before{content:'&';position:absolute;left:8px;bottom:-58px;font:italic 230px/.8 Georgia,serif;color:rgba(248,245,238,.09);letter-spacing:0}
+      .hello{min-height:92svh;padding:56px 18px 20px;background:var(--red);display:flex;flex-direction:column;justify-content:space-between}
+      .hello h2{font-size:clamp(84px,25vw,118px);line-height:.76;letter-spacing:-.075em}
+      .hello-links{display:grid;grid-template-columns:1fr;gap:0;margin-top:56px}
+      .hello-links a{display:flex;flex-direction:column;gap:7px;padding:17px 0;border-top:1px solid rgba(248,245,238,.45);border-bottom:0;text-transform:none;letter-spacing:0}
+      .hello-links a:last-child{border-bottom:1px solid rgba(248,245,238,.45)}
+      .hello-links small{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+      .hello-links b{font-size:15px;font-weight:400;letter-spacing:0;text-transform:none}
+      .hello-foot{margin-top:54px;padding-top:20px;border-top:0;align-items:flex-start;flex-direction:column;gap:18px;font-size:9px}
+      .hello-foot strong{font-size:11px}
+    }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-media img,.work-bit{transition:none}.word-a,.word-b,.merge-plus{display:none}.final-word{animation:none;opacity:1;transform:none;filter:none}}
   </style>
 </head>
 <body>
-  <header class="film" id="top"><img class="hero-art" src="assets/cesenativ-hero.png?v=4" alt="CESENATIV"></header>
+  <header class="film" id="top"><img class="hero-art" src="assets/cesenativ.svg?v=5" alt="CESENATIV"></header>
   <nav class="nav"><a class="brand" href="#top">CESENATIV</a><div class="navlinks"><a href="#work">Work</a></div></nav>
   <main>
     <section class="manifesto"><div class="manifesto-inner"><p class="serif" data-scroll-text>Selected work across brand identity, web design, print, and creative direction.</p></div></section>
@@ -57,8 +91,8 @@
       <div class="hello-inner">
         <h2>SAY<br>HELLO.</h2>
         <div class="hello-links">
-          <a href="mailto:angelcesena.studio@gmail.com" aria-label="Email Angel">EMAIL <span>↗</span></a>
-          <a href="https://www.instagram.com/cesenativ/" target="_blank" rel="noreferrer" aria-label="Instagram @cesenativ">INSTAGRAM <span>↗</span></a>
+          <a href="mailto:angelcesena.studio@gmail.com" aria-label="Email Angel"><small>EMAIL ↗</small><b>angelcesena.studio@gmail.com</b></a>
+          <a href="https://www.instagram.com/cesenativ/" target="_blank" rel="noreferrer" aria-label="Instagram @cesenativ"><small>INSTAGRAM ↗</small><b>@cesenativ</b></a>
         </div>
       </div>
       <div class="hello-foot">
