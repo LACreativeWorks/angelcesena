@@ -69,11 +69,23 @@
       .hello-foot{margin-top:54px;padding-top:20px;border-top:0;align-items:flex-start;flex-direction:column;gap:18px;font-size:9px}
       .hello-foot strong{font-size:11px}
     }
+    @media(max-width:760px){
+      .film{height:100svh;padding-top:52px;background:#d92d22;display:flex;align-items:center;justify-content:center;overflow:hidden}
+      .film img{position:static!important;width:64vw!important;max-width:310px!important;height:auto!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:grayscale(1) contrast(100) brightness(.72)!important;mix-blend-mode:screen!important}
+      .manifesto{min-height:auto!important;padding:76px 18px 50px!important;display:block!important}
+      .manifesto-inner{position:static!important;min-height:0!important;height:auto!important;padding:0!important;display:block!important}
+      .manifesto p{margin:0!important;font-size:clamp(42px,11vw,56px)!important;line-height:.98!important}
+      .work-head{padding:36px 18px 24px!important}
+      .work-break{min-height:0!important;height:150px!important;padding:28px 18px!important;justify-content:center!important}
+      .hello{min-height:72svh!important;padding:48px 18px 18px!important}
+      .hello-links{margin-top:42px!important}
+      .hello-foot{margin-top:36px!important}
+    }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-media img,.work-bit{transition:none}.word-a,.word-b,.merge-plus{display:none}.final-word{animation:none;opacity:1;transform:none;filter:none}}
   </style>
 </head>
 <body>
-  <header class="film" id="top"><img class="hero-art" src="assets/cesenativ.svg?v=5" alt="CESENATIV"></header>
+  <header class="film" id="top"><img class="hero-art" src="assets/cesenativ-hero.png?v=6" alt="CESENATIV"></header>
   <nav class="nav"><a class="brand" href="#top">CESENATIV</a><div class="navlinks"><a href="#work">Work</a></div></nav>
   <main>
     <section class="manifesto"><div class="manifesto-inner"><p class="serif" data-scroll-text>Selected work across brand identity, web design, print, and creative direction.</p></div></section>
