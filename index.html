@@ -6,117 +6,569 @@
   <meta name="theme-color" content="#f8f5ee">
   <meta name="description" content="CESENATIV — a creative space by Angel Cesena.">
   <title>CESENATIV — Angel Cesena</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{--cream:#f8f5ee;--ink:#0d0d0c;--red:#d92d22;--line:rgba(13,13,12,.18);--pad:clamp(18px,4vw,62px)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter Tight',Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}img{display:block;width:100%}.serif{font-family:Georgia,'Times New Roman',serif;font-weight:400}
-    .film{height:100svh;overflow:hidden;background:var(--red)}.hero-art{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-    .nav{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:16px var(--pad);background:rgba(248,245,238,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.brand{font-size:14px;font-weight:800;letter-spacing:.08em}.navlinks{display:flex;gap:20px;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
-    .manifesto{min-height:170svh;position:relative}.manifesto-inner{position:sticky;top:49px;min-height:calc(100svh - 49px);display:flex;align-items:center;padding:70px var(--pad)}.manifesto p{max-width:1320px;margin:0;font-size:clamp(49px,8vw,122px);line-height:.96;letter-spacing:-.055em}.manifesto .char{opacity:.13;transition:opacity .05s linear}.manifesto .char.on{opacity:1}
-    .work-head{display:flex;justify-content:space-between;align-items:end;gap:30px;padding:90px var(--pad) 28px;border-bottom:1px solid var(--line)}.work-head h1{margin:0;font-size:clamp(55px,9vw,138px);line-height:.82;letter-spacing:-.065em}.work-head p{max-width:260px;margin:0;font-size:12px;line-height:1.45}
-    .work-row{border-bottom:1px solid var(--line)}.work-row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:75px 1fr minmax(160px,260px) 42px;gap:20px;align-items:center;padding:30px var(--pad)}.work-row summary::-webkit-details-marker{display:none}.row-title{font-size:clamp(42px,6.2vw,96px);font-weight:500;line-height:.86;letter-spacing:-.06em}.row-type{font-size:11px;text-transform:uppercase;letter-spacing:.11em}.plus{font-size:34px;font-weight:300;text-align:right;transition:transform .25s ease}.work-row[open] .plus{transform:rotate(45deg)}.drop{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,.6fr);gap:var(--pad);padding:10px var(--pad) var(--pad)}.drop-media{overflow:hidden;aspect-ratio:16/10;background:#ddd}.drop-media img{height:100%;object-fit:cover}.drop-copy{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding-bottom:5px}.drop-copy p{max-width:390px;margin:0;font-size:15px;line-height:1.5}.invite-drop{grid-template-columns:1.15fr .85fr}.invite-stack{display:grid;grid-template-columns:1fr 1fr;gap:12px}.invite-stack img{height:100%;object-fit:cover;min-height:0}
-    .project{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:var(--pad);padding:var(--pad);border-bottom:1px solid var(--line)}.project:nth-of-type(even){grid-template-columns:minmax(280px,.65fr) minmax(0,1.35fr)}.project:nth-of-type(even) .project-media{order:2}.project-media{overflow:hidden;background:#ddd;aspect-ratio:4/3}.project-media img{height:100%;object-fit:cover;transition:transform .7s ease}.project:hover .project-media img{transform:scale(1.02)}.project-info{display:flex;flex-direction:column;justify-content:space-between;padding:2px 0}.num,.meta{font-size:10px;text-transform:uppercase;letter-spacing:.13em}.project h2{margin:50px 0 18px;font-size:clamp(45px,6vw,94px);line-height:.9;letter-spacing:-.055em}.project p{max-width:400px;margin:0;font-size:14px;line-height:1.5}.visit{display:inline-block;margin-top:28px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}.visit:after{content:' ↗'}
-    .type-project{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:30px;padding:clamp(70px,10vw,145px) var(--pad);background:var(--red);color:var(--cream);border-bottom:1px solid var(--ink)}.type-project h2{font-size:clamp(52px,9.5vw,150px);line-height:.83;letter-spacing:-.065em;margin:0}.type-project p{max-width:230px;font-size:12px;line-height:1.45;margin:0}.type-project .visit{margin-top:16px}
-    .invitations{padding:95px var(--pad) 110px;background:var(--ink);color:var(--cream)}.invite-head{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end;margin-bottom:50px}.invite-head h2{font-size:clamp(56px,10vw,150px);line-height:.82;letter-spacing:-.065em;margin:0}.invite-head p{max-width:360px;margin:0 0 5px;font-size:14px;line-height:1.5}.invite-wall{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.invite-wall img{height:100%;object-fit:cover}.invite-main{aspect-ratio:1/1}.invite-pair{display:grid;grid-template-rows:1fr 1fr;gap:18px}.invite-pair figure{margin:0;overflow:hidden;min-height:0}
-    .playground{position:relative;min-height:1200px;overflow:hidden;padding:95px var(--pad)}.playground h2{font-size:clamp(60px,12vw,180px);line-height:.78;letter-spacing:-.07em;margin:0;position:relative;z-index:2}.scribble{position:absolute;border-radius:50%;background:var(--red);width:38vw;height:38vw;right:-8vw;top:220px}.work-bit{position:absolute;margin:0;background:white;padding:10px;box-shadow:0 16px 50px rgba(0,0,0,.13);transition:transform .35s ease;z-index:3}.work-bit:hover{transform:rotate(0deg) scale(1.025)}.work-bit img{height:100%;object-fit:cover}.work-bit figcaption{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:10px 3px 3px}.bit-one{width:min(35vw,470px);left:7vw;top:330px;transform:rotate(-5deg)}.bit-two{width:min(29vw,390px);right:9vw;top:510px;transform:rotate(7deg)}.bit-three{width:min(33vw,440px);left:34vw;top:760px;transform:rotate(-2deg)}.stamp{position:absolute;font:italic clamp(40px,7vw,110px) Georgia,serif;color:var(--red);right:6vw;bottom:85px;transform:rotate(-8deg)}
-    .end{background:var(--red);color:var(--cream);padding:100px var(--pad) 24px}.end h2{font-size:clamp(76px,15vw,220px);line-height:.76;letter-spacing:-.075em;margin:0}.end-row{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-top:90px;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
-    @media(max-width:760px){.merge-word{font-size:clamp(48px,16vw,76px)}.final-word{font-size:clamp(54px,18vw,86px)}.nav{padding:15px 18px}.navlinks{gap:14px}.manifesto{min-height:150svh}.manifesto-inner{padding:55px 18px}.manifesto p{font-size:clamp(45px,13vw,65px)}.work-head{padding:80px 18px 22px;align-items:start;flex-direction:column}.work-row summary{grid-template-columns:26px 1fr 30px;gap:10px;padding:25px 18px}.row-title{font-size:clamp(39px,12.5vw,58px);line-height:.9}.row-type{display:none}.plus{font-size:28px}.drop,.invite-drop{grid-template-columns:1fr;gap:22px;padding:0 18px 28px}.drop-media{aspect-ratio:4/5}.drop-copy{padding:0 0 5px}.invite-stack{gap:8px}}
-    .work-break{display:none}
-    .hello{min-height:72svh;background:var(--red);color:var(--cream);padding:70px var(--pad) 22px;display:flex;flex-direction:column;justify-content:space-between}.hello h2{margin:0;font-size:clamp(78px,18vw,180px);line-height:.76;letter-spacing:-.075em}.hello-links{display:flex;gap:28px;margin-top:54px}.hello-links a{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(248,245,238,.55);padding-bottom:6px}.hello-links span{margin-left:5px}.hello-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:50px;font-size:10px;line-height:1.5;text-transform:uppercase;letter-spacing:.1em;border-top:1px solid rgba(248,245,238,.3)}.hello-foot div{display:flex;flex-direction:column;gap:2px}.hello-foot strong{font-size:12px;letter-spacing:.08em}
-    @media(max-width:760px){
-      .film{height:100svh;background:#cb2c21;overflow:hidden;position:relative}
-      .film img{position:absolute;left:50%;top:46%;width:66vw;max-width:360px;height:auto;object-fit:contain;transform:translate(-50%,-50%);filter:grayscale(1) contrast(100) brightness(.72);mix-blend-mode:screen}
-      .manifesto{min-height:auto;padding:54px 18px 64px}
-      .manifesto-inner{position:relative;top:auto;height:auto;display:block}
-      .manifesto p{font-size:clamp(44px,11.5vw,64px);line-height:.98}
-      .char{color:var(--ink)!important}
-      .work-head{padding-top:54px}
-      .work-break{display:flex;min-height:34svh;background:var(--ink);color:var(--cream);padding:38px 18px;flex-direction:column;justify-content:center;align-items:flex-end;gap:4px;font-size:11px;letter-spacing:.32em}
-      .hello{min-height:70svh;padding:62px 18px 18px}.hello h2{font-size:clamp(76px,24vw,112px);line-height:.78}.hello-links{margin-top:44px;gap:22px}.hello-foot{padding-top:34px;align-items:flex-start;flex-direction:column;gap:16px}}
-    @media(max-width:760px){
-      html{scroll-padding-top:52px}
-      body{overflow-x:hidden}
-      .nav{position:fixed;top:0;left:0;right:0;height:52px;padding:0 18px;z-index:60;background:rgba(248,245,238,.97);border-bottom:1px solid rgba(13,13,12,.16)}
-      .brand{font-size:12px}.navlinks{font-size:10px}
-      .film{height:100svh;padding-top:52px;background:#d92d22;position:relative;display:flex;align-items:center;justify-content:center}
-      .film img{position:static;width:58vw;max-width:280px;height:auto;object-fit:contain;transform:none;filter:none;mix-blend-mode:normal}
-      .manifesto{min-height:82svh;padding:84px 18px 64px;position:relative;display:flex;align-items:center}
-      .manifesto:before{content:'01';position:absolute;top:30px;left:18px;font-size:9px;letter-spacing:.14em}
-      .manifesto:after{content:'INTRO';position:absolute;top:30px;right:18px;font-size:9px;letter-spacing:.14em}
-      .manifesto-inner{position:static!important;min-height:0;height:auto;padding:0!important;display:block}
-      .manifesto p{font-size:clamp(43px,11vw,58px);line-height:.98;letter-spacing:-.055em}
-      .manifesto .char{opacity:1!important;color:var(--ink)!important}
-      .work-head{padding:42px 18px 26px;gap:18px;align-items:flex-start;flex-direction:column;border-top:1px solid var(--line)}
-      .work-head h1{font-size:clamp(54px,15vw,74px);line-height:.83}
-      .work-head p{font-size:11px;line-height:1.45;max-width:260px}
-      .work-row summary{grid-template-columns:22px 1fr 24px;gap:9px;padding:23px 18px}
-      .num{font-size:9px}.row-title{font-size:clamp(38px,10.8vw,52px);line-height:.9;letter-spacing:-.055em}
-      .plus{font-size:25px}
-      .drop,.invite-drop{grid-template-columns:1fr;gap:18px;padding:0 18px 26px}
-      .drop-media{aspect-ratio:4/5}.drop-copy p{font-size:13px}.visit{margin-top:18px}
-      .invite-stack{gap:8px}
-      .work-break{display:flex;position:relative;min-height:34svh;background:var(--ink);color:var(--cream);padding:34px 18px;flex-direction:column;justify-content:center;align-items:flex-end;gap:5px;font-size:10px;letter-spacing:.34em;overflow:hidden}
-      .work-break:before{content:'&';position:absolute;left:8px;bottom:-58px;font:italic 230px/.8 Georgia,serif;color:rgba(248,245,238,.09);letter-spacing:0}
-      .hello{min-height:92svh;padding:56px 18px 20px;background:var(--red);display:flex;flex-direction:column;justify-content:space-between}
-      .hello h2{font-size:clamp(84px,25vw,118px);line-height:.76;letter-spacing:-.075em}
-      .hello-links{display:grid;grid-template-columns:1fr;gap:0;margin-top:56px}
-      .hello-links a{display:flex;flex-direction:column;gap:7px;padding:17px 0;border-top:1px solid rgba(248,245,238,.45);border-bottom:0;text-transform:none;letter-spacing:0}
-      .hello-links a:last-child{border-bottom:1px solid rgba(248,245,238,.45)}
-      .hello-links small{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-      .hello-links b{font-size:15px;font-weight:400;letter-spacing:0;text-transform:none}
-      .hello-foot{margin-top:54px;padding-top:20px;border-top:0;align-items:flex-start;flex-direction:column;gap:18px;font-size:9px}
-      .hello-foot strong{font-size:11px}
+    :root{
+      --cream:#f8f5ee;
+      --ink:#0d0d0c;
+      --red:#d92d22;
+      --line:rgba(13,13,12,.16);
+      --pad:18px;
+      --nav:52px;
     }
-    @media(max-width:760px){
-      .film{height:100svh;padding-top:52px;background:#d92d22;display:flex;align-items:center;justify-content:center;overflow:hidden}
-      .film img{position:static!important;width:64vw!important;max-width:310px!important;height:auto!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:grayscale(1) contrast(100) brightness(.72)!important;mix-blend-mode:screen!important}
-      .manifesto{min-height:auto!important;padding:76px 18px 50px!important;display:block!important}
-      .manifesto-inner{position:static!important;min-height:0!important;height:auto!important;padding:0!important;display:block!important}
-      .manifesto p{margin:0!important;font-size:clamp(42px,11vw,56px)!important;line-height:.98!important}
-      .work-head{padding:36px 18px 24px!important}
-      .work-break{min-height:0!important;height:150px!important;padding:28px 18px!important;justify-content:center!important}
-      .hello{min-height:72svh!important;padding:48px 18px 18px!important}
-      .hello-links{margin-top:42px!important}
-      .hello-foot{margin-top:36px!important}
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:#18151a;
+      color:var(--ink);
+      font-family:"Inter Tight",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
     }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project-media img,.work-bit{transition:none}.word-a,.word-b,.merge-plus{display:none}.final-word{animation:none;opacity:1;transform:none;filter:none}}
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;width:100%}
+    .serif{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+
+    .page{
+      width:min(100%,497px);
+      margin:0 auto;
+      min-height:100vh;
+      background:var(--cream);
+      overflow:hidden;
+    }
+
+    /* NAV */
+    .nav{
+      position:fixed;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:100;
+      width:min(100%,497px);
+      height:var(--nav);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 var(--pad);
+      background:rgba(248,245,238,.97);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .brand{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.065em;
+    }
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    .nav-link{
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+    .menu{
+      width:18px;
+      display:grid;
+      gap:4px;
+    }
+    .menu i{
+      display:block;
+      height:1px;
+      background:var(--ink);
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      height:100svh;
+      padding-top:var(--nav);
+      background:var(--red);
+      color:var(--cream);
+      overflow:hidden;
+    }
+    .hero-image{
+      position:absolute;
+      inset:var(--nav) 0 0;
+      width:100%;
+      height:calc(100% - var(--nav));
+      object-fit:cover;
+      object-position:center;
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:var(--nav) 0 0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:0 18px 18px;
+      pointer-events:none;
+    }
+    .hero-meta{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:end;
+      font-size:9px;
+      line-height:1.5;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+    .hero-meta div:last-child{text-align:right}
+    .scroll-cue{
+      margin:24px auto 0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+    .scroll-cue:after{
+      content:"";
+      width:1px;
+      height:30px;
+      background:rgba(248,245,238,.72);
+    }
+
+    /* INTRO */
+    .intro{
+      position:relative;
+      padding:70px 18px 64px;
+      background:var(--cream);
+    }
+    .eyebrow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding-bottom:18px;
+      margin-bottom:28px;
+      border-bottom:1px solid var(--line);
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+    .intro-copy{
+      margin:0;
+      font-size:clamp(44px,11.5vw,58px);
+      line-height:.98;
+      letter-spacing:-.055em;
+    }
+    .intro-copy .char{
+      opacity:.12;
+      transition:opacity .18s ease;
+    }
+    .intro-copy .char.on{opacity:1}
+
+    /* WORK */
+    .work{
+      background:var(--cream);
+      color:var(--ink);
+    }
+    .work-head{
+      padding:34px 18px 28px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .work-head .eyebrow{
+      margin-bottom:22px;
+    }
+    .work-head h1{
+      margin:0 0 18px;
+      font-size:clamp(54px,15vw,74px);
+      line-height:.83;
+      letter-spacing:-.065em;
+    }
+    .work-head p{
+      margin:0;
+      max-width:270px;
+      font-size:11px;
+      line-height:1.45;
+    }
+
+    .work-row{
+      border-bottom:1px solid var(--line);
+    }
+    .work-row summary{
+      list-style:none;
+      cursor:pointer;
+      display:grid;
+      grid-template-columns:22px 1fr 24px;
+      gap:10px;
+      align-items:center;
+      padding:24px 18px;
+    }
+    .work-row summary::-webkit-details-marker{display:none}
+    .num{
+      font-size:9px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      opacity:.8;
+    }
+    .row-title{
+      font-size:clamp(38px,10.8vw,52px);
+      line-height:.9;
+      letter-spacing:-.055em;
+      font-weight:500;
+    }
+    .plus{
+      font-size:26px;
+      font-weight:300;
+      text-align:right;
+      transition:transform .2s ease;
+    }
+    .work-row[open] .plus{transform:rotate(45deg)}
+
+    .panel{
+      display:grid;
+      gap:16px;
+      padding:0 18px 26px;
+    }
+    .panel-media{
+      aspect-ratio:4/5;
+      overflow:hidden;
+      background:#ddd;
+    }
+    .panel-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .panel-copy p{
+      margin:0;
+      font-size:13px;
+      line-height:1.5;
+    }
+    .visit{
+      display:inline-block;
+      margin-top:15px;
+      font-size:10px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+    .visit:after{content:" ↗"}
+    .invite-stack{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .invite-stack .panel-media{aspect-ratio:3/4}
+
+    /* VISUAL BREAK */
+    .break{
+      height:190px;
+      position:relative;
+      overflow:hidden;
+      background:var(--ink);
+      color:var(--cream);
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      padding:26px 18px;
+    }
+    .break:before{
+      content:"&";
+      position:absolute;
+      left:-12px;
+      bottom:-58px;
+      font:italic 230px/.8 Georgia,serif;
+      color:rgba(248,245,238,.08);
+    }
+    .break-words{
+      position:relative;
+      z-index:2;
+      text-align:right;
+      font-size:10px;
+      line-height:1.42;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+    }
+
+    /* CONTACT */
+    .contact{
+      min-height:92svh;
+      padding:34px 18px 20px;
+      background:var(--red);
+      color:var(--cream);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .contact .eyebrow{
+      border-color:rgba(248,245,238,.34);
+      margin-bottom:28px;
+    }
+    .contact h2{
+      margin:0;
+      font-size:clamp(86px,25vw,118px);
+      line-height:.76;
+      letter-spacing:-.075em;
+    }
+    .contact-links{
+      margin-top:52px;
+    }
+    .contact-link{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+      padding:17px 0;
+      border-top:1px solid rgba(248,245,238,.44);
+    }
+    .contact-link:last-child{
+      border-bottom:1px solid rgba(248,245,238,.44);
+    }
+    .contact-link small{
+      font-size:9px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+    .contact-link b{
+      font-size:15px;
+      font-weight:400;
+    }
+    .contact-foot{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:end;
+      margin-top:56px;
+      font-size:9px;
+      line-height:1.5;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+    .contact-foot-left{
+      display:grid;
+      gap:2px;
+    }
+    .contact-foot-left strong{
+      font-size:11px;
+      letter-spacing:.08em;
+    }
+    .contact-foot-right{
+      text-align:right;
+    }
+
+    @media(min-width:761px){
+      .page{box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .intro-copy .char{opacity:1!important;transition:none}
+      .plus{transition:none}
+    }
   </style>
 </head>
+
 <body>
-  <header class="film" id="top"><img class="hero-art" src="assets/cesenativ-hero.png?v=6" alt="CESENATIV"></header>
-  <nav class="nav"><a class="brand" href="#top">CESENATIV</a><div class="navlinks"><a href="#work">Work</a></div></nav>
-  <main>
-    <section class="manifesto"><div class="manifesto-inner"><p class="serif" data-scroll-text>Selected work across brand identity, web design, print, and creative direction.</p></div></section>
-    <section id="work"><header class="work-head"><h1>Selected<br>worlds</h1><p>An evolving collection of identities, websites, archives, and things made for the joy of making them.</p></header>
-      <details class="work-row"><summary><span class="num">01</span><span class="row-title">Casa Archivo Familiar</span><span class="row-type">Digital archive · Family history</span><span class="plus">+</span></summary><div class="drop"><a class="drop-media" href="https://casaarchivofamiliar.com" target="_blank" rel="noreferrer"><img src="CAF_project_card.png" alt="Casa Archivo Familiar"></a><div class="drop-copy"><p>A living home for generations of photographs and family stories.</p><a class="visit" href="https://casaarchivofamiliar.com" target="_blank" rel="noreferrer">Enter the archive</a></div></div></details>
-      <details class="work-row"><summary><span class="num">02</span><span class="row-title">LAUXE Event Rentals</span><span class="row-type">Brand · Digital</span><span class="plus">+</span></summary><div class="drop"><a class="drop-media" href="https://lauxeeventrentals.netlify.app" target="_blank" rel="noreferrer"><img src="assets/lauxe-site.jpg" alt="LAUXE Event Rentals"></a><div class="drop-copy"><p>A dramatic identity and mobile experience for celebrations with presence.</p><a class="visit" href="https://lauxeeventrentals.netlify.app" target="_blank" rel="noreferrer">View site</a></div></div></details>
-      <details class="work-row"><summary><span class="num">03</span><span class="row-title">Lugo's Barber Shop</span><span class="row-type">Brand · Print</span><span class="plus">+</span></summary><div class="drop"><div class="drop-media"><img src="LUGOSBANNER.png" alt="Lugo's Barber Shop"></div><div class="drop-copy"><p>Neighborhood heritage shaped into a confident barbershop identity.</p></div></div></details>
-      <details class="work-row"><summary><span class="num">04</span><span class="row-title">Balloon Designs by Nina</span><span class="row-type">Creative direction · Digital</span><span class="plus">+</span></summary><div class="drop"><a class="drop-media" href="https://balloonsbynina.com" target="_blank" rel="noreferrer"><img src="assets/bdn-site-mobile.jpg" alt="Balloon Designs by Nina website"></a><div class="drop-copy"><p>The family studio where so much of my eye was formed.</p><a class="visit" href="https://balloonsbynina.com" target="_blank" rel="noreferrer">Visit site</a></div></div></details>
-      <details class="work-row"><summary><span class="num">05</span><span class="row-title">Invitations</span><span class="row-type">Personal celebrations</span><span class="plus">+</span></summary><div class="drop invite-drop"><div class="drop-media"><img src="assets/roundup.jpg" alt="Angel's 28th Roundup invitation world"></div><div class="invite-stack"><img src="a-charmed-gathering-invie-front.jpg" alt="A Charmed Gathering invitation front"><img src="a-charmed-gathering-invite-back.jpg" alt="A Charmed Gathering invitation back"></div></div></details>
-    </section>
-    <section class="work-break" aria-hidden="true">
-      <span>IDEAS</span><span>PEOPLE</span><span>PLACES</span><span>THINGS</span>
-    </section>
-    <section class="hello" id="hello">
-      <div class="hello-inner">
-        <h2>SAY<br>HELLO.</h2>
-        <div class="hello-links">
-          <a href="mailto:angelcesena.studio@gmail.com" aria-label="Email Angel"><small>EMAIL ↗</small><b>angelcesena.studio@gmail.com</b></a>
-          <a href="https://www.instagram.com/cesenativ/" target="_blank" rel="noreferrer" aria-label="Instagram @cesenativ"><small>INSTAGRAM ↗</small><b>@cesenativ</b></a>
+  <div class="page">
+    <nav class="nav">
+      <a class="brand" href="#top">CESENATIV</a>
+      <div class="nav-right">
+        <a class="nav-link" href="#work">Work</a>
+        <span class="menu" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero" id="top">
+        <img class="hero-image" src="assets/cesenativ-hero-poster.jpg?v=10" alt="CESENATIV">
+        <div class="hero-overlay">
+          <div class="hero-meta">
+            <div>A creative space<br>by Angel Cesena</div>
+            <div>Los Angeles<br>2026</div>
+          </div>
+          <div class="scroll-cue">Scroll</div>
         </div>
-      </div>
-      <div class="hello-foot">
-        <div><strong>CESENATIV</strong><span>A creative space by Angel Cesena</span><span>L.A. Creative Works LLC</span></div>
-        <span>Los Angeles · 2026</span>
-      </div>
-    </section>
-  </main>
+      </section>
+
+      <section class="intro" id="intro">
+        <div class="eyebrow"><span>01</span><span>Intro</span></div>
+        <p class="intro-copy serif" data-reveal>
+          Selected work across brand identity, web design, print, and creative direction.
+        </p>
+      </section>
+
+      <section class="work" id="work">
+        <header class="work-head">
+          <div class="eyebrow"><span>02</span><span>Work</span></div>
+          <h1>Selected<br>worlds</h1>
+          <p>An evolving collection of identities, websites, archives, and creative projects.</p>
+        </header>
+
+        <details class="work-row">
+          <summary>
+            <span class="num">01</span>
+            <span class="row-title">Casa Archivo Familiar</span>
+            <span class="plus">+</span>
+          </summary>
+          <div class="panel">
+            <a class="panel-media" href="https://casaarchivofamiliar.com" target="_blank" rel="noreferrer">
+              <img src="CAF_project_card.png" alt="Casa Archivo Familiar">
+            </a>
+            <div class="panel-copy">
+              <p>A living home for generations of photographs and family stories.</p>
+              <a class="visit" href="https://casaarchivofamiliar.com" target="_blank" rel="noreferrer">Enter the archive</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="work-row">
+          <summary>
+            <span class="num">02</span>
+            <span class="row-title">LAUXE Event Rentals</span>
+            <span class="plus">+</span>
+          </summary>
+          <div class="panel">
+            <a class="panel-media" href="https://lauxeeventrentals.netlify.app" target="_blank" rel="noreferrer">
+              <img src="assets/lauxe-site.jpg" alt="LAUXE Event Rentals">
+            </a>
+            <div class="panel-copy">
+              <p>A dramatic identity and digital experience for celebrations with presence.</p>
+              <a class="visit" href="https://lauxeeventrentals.netlify.app" target="_blank" rel="noreferrer">View site</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="work-row">
+          <summary>
+            <span class="num">03</span>
+            <span class="row-title">Lugo's Barber Shop</span>
+            <span class="plus">+</span>
+          </summary>
+          <div class="panel">
+            <div class="panel-media">
+              <img src="LUGOSBANNER.png" alt="Lugo's Barber Shop">
+            </div>
+            <div class="panel-copy">
+              <p>Neighborhood heritage shaped into a confident barbershop identity.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="work-row">
+          <summary>
+            <span class="num">04</span>
+            <span class="row-title">Balloon Designs by Nina</span>
+            <span class="plus">+</span>
+          </summary>
+          <div class="panel">
+            <a class="panel-media" href="https://balloonsbynina.com" target="_blank" rel="noreferrer">
+              <img src="assets/bdn-site-mobile.jpg" alt="Balloon Designs by Nina">
+            </a>
+            <div class="panel-copy">
+              <p>The family studio where so much of my eye was formed.</p>
+              <a class="visit" href="https://balloonsbynina.com" target="_blank" rel="noreferrer">Visit site</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="work-row">
+          <summary>
+            <span class="num">05</span>
+            <span class="row-title">Invitations</span>
+            <span class="plus">+</span>
+          </summary>
+          <div class="panel">
+            <div class="panel-media">
+              <img src="assets/roundup.jpg" alt="Invitation project">
+            </div>
+            <div class="invite-stack">
+              <div class="panel-media"><img src="a-charmed-gathering-invie-front.jpg" alt="A Charmed Gathering invitation front"></div>
+              <div class="panel-media"><img src="a-charmed-gathering-invite-back.jpg" alt="A Charmed Gathering invitation back"></div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <section class="break" aria-hidden="true">
+        <div class="break-words">Ideas<br>People<br>Places<br>Things</div>
+      </section>
+
+      <section class="contact" id="hello">
+        <div>
+          <div class="eyebrow"><span>03</span><span>Contact</span></div>
+          <h2>SAY<br>HELLO.</h2>
+
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:angelcesena.studio@gmail.com">
+              <small>Email ↗</small>
+              <b>angelcesena.studio@gmail.com</b>
+            </a>
+            <a class="contact-link" href="https://www.instagram.com/cesenativ/" target="_blank" rel="noreferrer">
+              <small>Instagram ↗</small>
+              <b>@cesenativ</b>
+            </a>
+          </div>
+        </div>
+
+        <footer class="contact-foot">
+          <div class="contact-foot-left">
+            <strong>CESENATIV</strong>
+            <span>A creative space by Angel Cesena</span>
+            <span>L.A. Creative Works LLC</span>
+            <span>Los Angeles · 2026</span>
+          </div>
+          <div class="contact-foot-right">Lumen<br>in Tenebris</div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
   <script>
-    const text=document.querySelector('[data-scroll-text]');
-    const chars=[...text.textContent].map(c=>{const s=document.createElement('span');s.className='char';s.textContent=c;return s});text.textContent='';chars.forEach(s=>text.appendChild(s));
-    let ticking=false;function reveal(){const section=document.querySelector('.manifesto'),start=section.offsetTop-innerHeight*.68,end=section.offsetTop+section.offsetHeight-innerHeight,progress=Math.max(0,Math.min(1,(scrollY-start)/Math.max(1,end-start))),count=Math.floor(progress*(chars.length+5));chars.forEach((c,i)=>c.classList.toggle('on',i<count));ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(reveal);ticking=true}},{passive:true});addEventListener('resize',reveal);reveal();
+    (() => {
+      const text = document.querySelector('[data-reveal]');
+      if (!text) return;
+
+      const raw = text.textContent.replace(/\s+/g, ' ').trim();
+      text.textContent = '';
+
+      const chars = [...raw].map((ch) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = ch;
+        text.appendChild(span);
+        return span;
+      });
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        chars.forEach(c => c.classList.add('on'));
+        return;
+      }
+
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        chars.forEach((c, i) => {
+          setTimeout(() => c.classList.add('on'), i * 18);
+        });
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            play();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.35 });
+
+      observer.observe(text);
+    })();
   </script>
 </body>
 </html>
